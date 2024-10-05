@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magic_hands/config/colors.dart';
+import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
 
@@ -17,44 +18,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsClass.bgColor,
-      body: PageView(
-        reverse: false,
-        onPageChanged: (value) {
-          setState(() {
-            _currentIndex = value;
-          });
-        },
+      body: Stack(
         children: [
-          Padding(
-            padding:
-                EdgeInsets.only(bottom: CustomMethods.mediaWidth(context, 7)),
-            child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: CustomWidgets.rowOfLines(context, _currentIndex),
-              ),
-            ]),
+          PageView(
+            reverse: false,
+            onPageChanged: (value) {
+              setState(() {
+                _currentIndex = value;
+              });
+            },
+            children: [
+              CustomWidgets.pageViewPages(context, ImgPath.enjoyingGirl,
+                  "Gain cooking confidence easily and enjoy every bite you create!"),
+              CustomWidgets.pageViewPages(context, ImgPath.happyGirl,
+                  "Master your cooking skills and enjoy every bite with total satisfaction."),
+              CustomWidgets.pageViewPages(context, ImgPath.thinkingGirl,
+                  "Master cooking styles from every corner of the world from home."),
+            ],
           ),
-          Padding(
-            padding:
-                EdgeInsets.only(bottom: CustomMethods.mediaWidth(context, 7)),
-            child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: CustomWidgets.rowOfLines(context, _currentIndex),
-              ),
-            ]),
-          ),
-          Padding(
-            padding:
-                EdgeInsets.only(bottom: CustomMethods.mediaWidth(context, 7)),
-            child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: CustomWidgets.rowOfLines(context, _currentIndex),
-              ),
-            ]),
-          ),
+          Container(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding:
+                  EdgeInsets.only(bottom: CustomMethods.mediaWidth(context, 7)),
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: CustomWidgets.rowOfLines(context, _currentIndex),
+                ),
+              ]),
+            ),
+          )
         ],
       ),
     );

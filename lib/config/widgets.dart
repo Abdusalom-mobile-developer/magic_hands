@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magic_hands/config/colors.dart';
+import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 
 class CustomWidgets {
@@ -36,5 +37,60 @@ class CustomWidgets {
       }
     }
     return list;
+  }
+
+  static Widget pageViewPages(
+      BuildContext context, String imagePath, String text) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+          horizontal: CustomMethods.mediaWidth(context, 10)),
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 6,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image(
+                      image: AssetImage(imagePath),
+                      width: CustomMethods.mediaWidth(context, 1.3),
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+              flex: 5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomWidgets.height(context, 20),
+                  Text(
+                    "If you want to:",
+                    style: TextStyle(
+                        fontFamily: "Fredoka",
+                        color: ColorsClass.darkRed,
+                        fontSize: CustomMethods.mediaWidth(context, 20)),
+                  ),
+                  Text(
+                    text,
+                    style: TextStyle(
+                        color: ColorsClass.black,
+                        fontFamily: "Fredoka",
+                        fontSize: CustomMethods.mediaWidth(context, 15)),
+                  ),
+                ],
+              ))
+        ],
+      ),
+    );
   }
 }
