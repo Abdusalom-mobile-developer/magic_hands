@@ -73,6 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextField(
+                          cursorColor: ColorsClass.black,
                           controller: _controller,
                           focusNode: _focusNode,
                           style: TextStyle(
