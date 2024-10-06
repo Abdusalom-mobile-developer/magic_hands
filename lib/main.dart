@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_hands/screens/onboarding.dart';
+import 'package:magic_hands/screens/register.dart';
 import 'package:magic_hands/screens/splash.dart';
 
 void main() {
@@ -33,6 +34,11 @@ class MyApp extends StatelessWidget {
       path: "/onboarding",
       builder: (context, state) => const OnboardingScreen(),
     ),
-    
+    GoRoute(
+      name: "register",
+      path: "/register",
+      builder: (context, state) => const RegisterScreen(),
+    ),
+  
   ]);
 }
