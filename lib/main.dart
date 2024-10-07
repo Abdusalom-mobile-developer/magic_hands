@@ -21,24 +21,57 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  final _router = GoRouter(
-    initialLocation: "/splash",
-    routes: [
+  final _router = GoRouter(initialLocation: "/splash", routes: [
     GoRoute(
       name: "splash",
       path: "/splash",
-      builder: (context, state) => const SplashScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          transitionDuration: const Duration(milliseconds: 900),
+          child: const SplashScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeIn).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
     ),
     GoRoute(
       name: "onboarding",
       path: "/onboarding",
-      builder: (context, state) => const OnboardingScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          transitionDuration: const Duration(milliseconds: 600),
+          child: const OnboardingScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.ease).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
     ),
     GoRoute(
       name: "register",
       path: "/register",
-      builder: (context, state) => const RegisterScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          transitionDuration: const Duration(milliseconds: 700),
+          child: const RegisterScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInBack).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
     ),
-  
   ]);
 }
