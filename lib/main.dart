@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:magic_hands/screens/home.dart';
 import 'package:magic_hands/screens/onboarding.dart';
 import 'package:magic_hands/screens/register.dart';
 import 'package:magic_hands/screens/splash.dart';
@@ -21,10 +22,9 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  final _router = GoRouter(initialLocation: "/splash", routes: [
+  final _router = GoRouter(initialLocation: "/", routes: [
     GoRoute(
-      name: "splash",
-      path: "/splash",
+      path: "/",
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           key: state.pageKey,
@@ -49,7 +49,8 @@ class MyApp extends StatelessWidget {
           child: const OnboardingScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
-              opacity: CurveTween(curve: Curves.ease).animate(animation),
+              opacity:
+                  CurveTween(curve: Curves.easeInOutBack).animate(animation),
               child: child,
             );
           },
@@ -73,5 +74,21 @@ class MyApp extends StatelessWidget {
         );
       },
     ),
+    GoRoute(
+      path: "/home/:Abdusalom",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          transitionDuration: const Duration(milliseconds: 500),
+          child: HomeScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    )
   ]);
 }

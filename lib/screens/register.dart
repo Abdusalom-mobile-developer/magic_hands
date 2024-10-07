@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
@@ -119,6 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       setState(() {
                                         _hadError = false;
                                       });
+                                      context.go("/home");
                                     }
                                     _controller.clear();
                                     FocusScope.of(context).unfocus();
