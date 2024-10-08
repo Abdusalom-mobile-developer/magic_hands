@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:magic_hands/providers/provider.dart';
 import 'package:magic_hands/screens/home.dart';
 import 'package:magic_hands/screens/onboarding.dart';
 import 'package:magic_hands/screens/register.dart';
 import 'package:magic_hands/screens/splash.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  // ignore: unused_local_variable
+  var box = await Hive.openBox("myBox");
   runApp(MyApp());
 }
 
@@ -16,9 +22,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: _router,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ProvidersClass(),
+        )
+      ],
+      builder: (context, child) => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: _router,
+      ),
     );
   }
 
@@ -45,12 +58,12 @@ class MyApp extends StatelessWidget {
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           key: state.pageKey,
-          transitionDuration: const Duration(milliseconds: 600),
+          transitionDuration: const Duration(milliseconds: 700),
           child: const OnboardingScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity:
-                  CurveTween(curve: Curves.easeInOutBack).animate(animation),
+                  CurveTween(curve: Curves.easeInBack).animate(animation),
               child: child,
             );
           },
@@ -75,12 +88,12 @@ class MyApp extends StatelessWidget {
       },
     ),
     GoRoute(
-      path: "/home/:Abdusalom",
+      path: "/home",
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           key: state.pageKey,
           transitionDuration: const Duration(milliseconds: 500),
-          child: HomeScreen(),
+          child: const HomeScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),

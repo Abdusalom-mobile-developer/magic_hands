@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -6,8 +8,8 @@ import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
-import 'package:magic_hands/main.dart';
-import 'package:magic_hands/screens/onboarding.dart';
+import 'package:magic_hands/moduls/hive_keys.dart';
+import 'package:magic_hands/services/hive_crud.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String id = "/splash_screen";
@@ -26,6 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(milliseconds: 2100),
       () {
+        // bool? isFirst = HiveCrud.read(HiveKeys.isFirst);
+        // if (isFirst == false) {
+        //   context.go("/home");
+        // } else {
+        //   context.go("/onboarding");
+        // }
+
         context.go("/onboarding");
       },
     );
