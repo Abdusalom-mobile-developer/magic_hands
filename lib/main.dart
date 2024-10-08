@@ -62,8 +62,7 @@ class MyApp extends StatelessWidget {
           child: const OnboardingScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
-              opacity:
-                  CurveTween(curve: Curves.easeInBack).animate(animation),
+              opacity: CurveTween(curve: Curves.easeInBack).animate(animation),
               child: child,
             );
           },
@@ -76,7 +75,7 @@ class MyApp extends StatelessWidget {
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           key: state.pageKey,
-          transitionDuration: const Duration(milliseconds: 700),
+          transitionDuration: const Duration(milliseconds: 500),
           child: const RegisterScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
