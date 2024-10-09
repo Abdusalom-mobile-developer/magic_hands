@@ -3,6 +3,7 @@ import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
+import 'package:magic_hands/moduls/categories_info.dart';
 import 'package:magic_hands/moduls/hive_keys.dart';
 import 'package:magic_hands/providers/provider.dart';
 import 'package:magic_hands/services/hive_crud.dart';
@@ -11,7 +12,6 @@ import 'package:provider/provider.dart';
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ProvidersClass>(
@@ -110,22 +110,35 @@ class HomeScreen extends StatelessWidget {
                 ),
                 CustomWidgets.height(context, 50),
                 SizedBox(
-                  height: CustomMethods.mediaWidth(context, 5),
+                  height: CustomMethods.mediaWidth(context, 6),
                   child: ListView.builder(
                     itemCount: 10,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => Container(
-                      margin: const EdgeInsets.only(right: 10),
-                      height: CustomMethods.mediaWidth(context, 5),
+                      margin: const EdgeInsets.only(right: 12),
+                      height: CustomMethods.mediaWidth(context, 6),
                       width: CustomMethods.mediaWidth(context, 4),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: ColorsClass.bgColor,
-                          border:
-                              Border.all(color: ColorsClass.darkRed, width: 2)),
+                        borderRadius: BorderRadius.circular(10),
+                        color: ColorsClass.bgColor,
+                        image: const DecorationImage(
+                            image:
+                                AssetImage("assets/images/flags/ic_spain.jpg"),
+                            fit: BoxFit.cover),
+                        border:
+                            Border.all(color: ColorsClass.darkRed, width: 2),
+                      ),
                     ),
                   ),
-                )
+                ),
+                CustomWidgets.height(context, 50),
+                Text(
+                  "Recomendations",
+                  style: TextStyle(
+                      color: ColorsClass.black,
+                      fontSize: CustomMethods.mediaWidth(context, 18),
+                      fontFamily: "Fredoka"),
+                ),
               ],
             ),
           ))),
