@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
@@ -19,14 +20,14 @@ class HomeScreen extends StatelessWidget {
               currentIndex: provider.bottomNavigationBarIndex,
               backgroundColor: ColorsClass.bgColor,
               onTap: (value) {
-                provider.changeCurrentIndex(value);
+                provider.changeCurrentIndex(value, context);
               },
               unselectedItemColor: ColorsClass.black,
               selectedItemColor: ColorsClass.darkRed,
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.fastfood_rounded), label: "Options"),
+                    icon: Icon(Icons.fastfood_rounded), label: "Categories"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.settings), label: "Settings"),
               ]),
@@ -90,7 +91,9 @@ class HomeScreen extends StatelessWidget {
                       color: ColorsClass.darkRed,
                     ),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.go("/categories");
+                      },
                       child: Text(
                         "See all categories",
                         style: TextStyle(
@@ -124,8 +127,7 @@ class HomeScreen extends StatelessWidget {
                             image: AssetImage(
                                 provider.categoriesInfo[index].imgPath),
                             fit: BoxFit.cover),
-                        border:
-                            Border.all(color: ColorsClass.darkRed, width: 2),
+                        border: Border.all(color: ColorsClass.black, width: 1),
                       ),
                     ),
                   ),

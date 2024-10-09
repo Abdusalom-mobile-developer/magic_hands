@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:magic_hands/main.dart';
 import 'package:magic_hands/moduls/categories_info.dart';
 
 class ProvidersClass extends ChangeNotifier {
@@ -18,20 +20,25 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeCurrentIndex(int index) {
+  void changeCurrentIndex(int index, BuildContext context) {
     _bottomNavigationBarIndex = index;
+    if (_bottomNavigationBarIndex == 0) {
+      context.go("/home");
+    } else if (_bottomNavigationBarIndex == 1) {
+      context.go("/categories");
+    }
     notifyListeners();
   }
 
-   List<CategoriesInfo> categoriesInfo = [
+  List<CategoriesInfo> categoriesInfo = [
     CategoriesInfo("British", "assets/images/flags/ic_britain.jpg"),
     CategoriesInfo("American", "assets/images/flags/ic_america.jpg"),
     CategoriesInfo("French", "assets/images/flags/ic_france.jpg"),
     CategoriesInfo("Canadian", "assets/images/flags/ic_canada.jpg"),
-    CategoriesInfo("Jamaican", "assets/images/flags/ic_jamaica.jpg"),  
+    CategoriesInfo("Jamaican", "assets/images/flags/ic_jamaica.jpg"),
     CategoriesInfo("Chinese", "assets/images/flags/ic_china.jpg"),
     CategoriesInfo("Dutch", "assets/images/flags/ic_netherlands.jpg"),
-    CategoriesInfo("Egyptian", "assets/images/flags/ic_britain.jpg"),
+    CategoriesInfo("Egyptian", "assets/images/flags/ic_egypt.jpg"),
     CategoriesInfo("Greek", "assets/images/flags/ic_greece.jpg"),
     CategoriesInfo("Indian", "assets/images/flags/ic_india.jpg"),
     CategoriesInfo("Irish", "assets/images/flags/ic_ireland.jpg"),

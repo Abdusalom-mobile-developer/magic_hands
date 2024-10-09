@@ -17,4 +17,5 @@ class ImgPath {
   static const String saladImg = "assets/images/salad_img.jpg";
   static const String foodImg = "assets/images/food_img.jpg";
   static const String spaghetti = "assets/images/spaghetti.jpg";
+  static const String choosingGirl = "assets/images/choosing_girl.png";
 }
