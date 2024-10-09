@@ -3,7 +3,6 @@ import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
-import 'package:magic_hands/moduls/categories_info.dart';
 import 'package:magic_hands/moduls/hive_keys.dart';
 import 'package:magic_hands/providers/provider.dart';
 import 'package:magic_hands/services/hive_crud.dart';
@@ -112,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: CustomMethods.mediaWidth(context, 6),
                   child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: provider.categoriesInfo.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => Container(
                       margin: const EdgeInsets.only(right: 12),
@@ -121,9 +120,9 @@ class HomeScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: ColorsClass.bgColor,
-                        image: const DecorationImage(
-                            image:
-                                AssetImage("assets/images/flags/ic_spain.jpg"),
+                        image: DecorationImage(
+                            image: AssetImage(
+                                provider.categoriesInfo[index].imgPath),
                             fit: BoxFit.cover),
                         border:
                             Border.all(color: ColorsClass.darkRed, width: 2),
@@ -131,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                CustomWidgets.height(context, 50),
+                CustomWidgets.height(context, 20),
                 Text(
                   "Recomendations",
                   style: TextStyle(
