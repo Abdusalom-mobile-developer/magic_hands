@@ -20,6 +20,7 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
+  
   void changeCurrentIndex(int index, BuildContext context) {
     _bottomNavigationBarIndex = index;
     if (_bottomNavigationBarIndex == 0) {

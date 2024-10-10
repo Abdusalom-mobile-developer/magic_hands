@@ -40,69 +40,115 @@ class CategoriesScreen extends StatelessWidget {
               horizontal: CustomMethods.mediaWidth(context, 20),
             ),
             width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                CustomWidgets.height(context, 3),
-                Text(
-                  "Categories",
-                  style: TextStyle(
-                      color: ColorsClass.black,
-                      fontSize: CustomMethods.mediaWidth(context, 14),
-                      fontFamily: "Fredoka"),
-                ),
-                Text(
-                  "Click to see all food options belongs to that country",
-                  style: TextStyle(
-                      color: ColorsClass.black.withOpacity(0.5),
-                      fontSize: CustomMethods.mediaWidth(context, 20),
-                      fontFamily: "Fredoka"),
-                ),
-                CustomWidgets.height(context, 25),
-                Expanded(
-                    child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.2 / 1,
-                    crossAxisSpacing: CustomMethods.mediaWidth(context, 30),
-                    mainAxisSpacing: CustomMethods.mediaWidth(context, 50),
+                // Container(
+                //   height: CustomMethods.mediaWidth(context, 2.1),
+                //   width: double.infinity,
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(10),
+                //     image: const DecorationImage(
+                //         image: AssetImage(ImgPath.vartFood6),
+                //         fit: BoxFit.cover),
+                //     color: ColorsClass.bgColor,
+                //   ),
+                //   child: Container(
+                //       decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(10),
+                //     gradient: LinearGradient(
+                //         begin: Alignment.bottomLeft,
+                //         colors: [
+                //           Colors.black.withOpacity(0.2),
+                //           Colors.black.withOpacity(0.2)
+                //         ]),
+                //   )),
+                // ),
+                Transform.translate(
+                  offset: Offset(0, -CustomMethods.mediaWidth(context, 7)),
+                  child: Image(
+                    image: const AssetImage(ImgPath.recipe),
+                    height: CustomMethods.mediaWidth(context, 1),
                   ),
-                  itemCount: provider.categoriesInfo.length,
-                  itemBuilder: (context, index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                ),
+                // CustomWidgets.height(context, 24),
+                SizedBox(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      provider.categoriesInfo[index].imgPath),
-                                  fit: BoxFit.cover),
-                              color: ColorsClass.bgColor,
-                            ),
-                            child: Container(
-                                decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              gradient: LinearGradient(
-                                  begin: Alignment.bottomLeft,
-                                  colors: [
-                                    Colors.black.withOpacity(0.18),
-                                    Colors.black.withOpacity(0.2)
-                                  ]),
-                            ))),
-                      ),
+                      CustomWidgets.height(context, 1.4),
                       Text(
-                        provider.categoriesInfo[index].name,
+                        "Categories",
                         style: TextStyle(
                             color: ColorsClass.black,
-                            fontSize: CustomMethods.mediaWidth(context, 20),
+                            fontSize: CustomMethods.mediaWidth(context, 14),
                             fontFamily: "Fredoka"),
                       ),
-                      CustomWidgets.height(context, 70),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Explore a world of food! Click any countrie's flag to see the options.",
+                              style: TextStyle(
+                                  color: ColorsClass.black.withOpacity(0.5),
+                                  fontSize:
+                                      CustomMethods.mediaWidth(context, 20),
+                                  fontFamily: "Fredoka"),
+                            ),
+                          ),
+                          CustomWidgets.width(context, 10)
+                        ],
+                      ),
+                      CustomWidgets.height(context, 25),
+                      Expanded(
+                          child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1.2 / 1,
+                          crossAxisSpacing:
+                              CustomMethods.mediaWidth(context, 30),
+                          mainAxisSpacing:
+                              CustomMethods.mediaWidth(context, 50),
+                        ),
+                        itemCount: provider.categoriesInfo.length,
+                        itemBuilder: (context, index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    image: DecorationImage(
+                                        image: AssetImage(provider
+                                            .categoriesInfo[index].imgPath),
+                                        fit: BoxFit.cover),
+                                    color: ColorsClass.bgColor,
+                                  ),
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.bottomLeft,
+                                        colors: [
+                                          Colors.black.withOpacity(0.18),
+                                          Colors.black.withOpacity(0.2)
+                                        ]),
+                                  ))),
+                            ),
+                            Text(
+                              provider.categoriesInfo[index].name,
+                              style: TextStyle(
+                                  color: ColorsClass.black,
+                                  fontSize:
+                                      CustomMethods.mediaWidth(context, 20),
+                                  fontFamily: "Fredoka"),
+                            ),
+                            CustomWidgets.height(context, 70),
+                          ],
+                        ),
+                      )),
                     ],
                   ),
-                )),
+                )
               ],
             ),
           ))),

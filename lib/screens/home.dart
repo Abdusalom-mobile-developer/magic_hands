@@ -72,12 +72,12 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      width: CustomMethods.mediaWidth(context, 6.5),
-                      height: CustomMethods.mediaWidth(context, 6.5),
+                      width: CustomMethods.mediaWidth(context, 4),
+                      height: CustomMethods.mediaWidth(context, 4),
                       decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              image: AssetImage(ImgPath.spaghetti),
+                              image: AssetImage(ImgPath.logo),
                               fit: BoxFit.cover)),
                     )
                   ],
@@ -92,6 +92,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     child: TextButton(
                       onPressed: () {
+                        provider.changeCurrentIndex(1, context);
                         context.go("/categories");
                       },
                       child: Text(

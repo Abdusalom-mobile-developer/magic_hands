@@ -17,5 +17,13 @@ class ImgPath {
   static const String saladImg = "assets/images/salad_img.jpg";
   static const String foodImg = "assets/images/food_img.jpg";
   static const String spaghetti = "assets/images/spaghetti.jpg";
+  static const String vartFood1 = "assets/images/vert_food1.jpg";
+  static const String vartFood2 = "assets/images/vert_food2.jpg";
+  static const String vartFood3 = "assets/images/vert_food3.jpg";
+  static const String vartFood4 = "assets/images/vert_food4.jpg";
+  static const String vartFood5 = "assets/images/vert_food5.jpg";
+  static const String vartFood6 = "assets/images/vert_food6.jpg";
   static const String choosingGirl = "assets/images/choosing_girl.png";
+  static const String choosingGirl2 = "assets/images/choosing_girl2.png";
+    static const String recipe = "assets/images/recipe.png";
 }
