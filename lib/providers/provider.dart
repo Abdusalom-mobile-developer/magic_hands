@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_hands/main.dart';
 import 'package:magic_hands/moduls/categories_info.dart';
+import 'package:magic_hands/moduls/meal_categories.dart';
 
 class ProvidersClass extends ChangeNotifier {
   bool _hadError = false;
@@ -20,7 +20,6 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
-  
   void changeCurrentIndex(int index, BuildContext context) {
     _bottomNavigationBarIndex = index;
     if (_bottomNavigationBarIndex == 0) {
@@ -56,5 +55,32 @@ class ProvidersClass extends ChangeNotifier {
     CategoriesInfo("Tunisian", "assets/images/flags/ic_tunisia.jpg"),
     CategoriesInfo("Polish", "assets/images/flags/ic_poland.jpg"),
     CategoriesInfo("Filipino", "assets/images/flags/ic_philippines.jpg"),
+  ];
+
+  List<MealCategories> mealCategories = [
+    MealCategories(
+        "1", "Beef", "https://www.themealdb.com/images/category/beef.png"),
+    MealCategories("2", "Chicken",
+        "https://www.themealdb.com/images/category/chicken.png"),
+    MealCategories("3", "Dessert",
+        "https://www.themealdb.com/images/category/dessert.png"),
+    MealCategories(
+        "4", "Lamb", "https://www.themealdb.com/images/category/lamb.png"),
+    MealCategories("5", "Miscellaneous",
+        "https://www.themealdb.com/images/category/miscellaneous.png"),
+    MealCategories(
+        "6", "Pasta", "https://www.themealdb.com/images/category/pasta.png"),
+    MealCategories(
+        "7", "Pork", "https://www.themealdb.com/images/category/pork.png"),
+    MealCategories("8", "Seafood",
+        "https://www.themealdb.com/images/category/seafood.png"),
+    MealCategories(
+        "9", "Side", "https://www.themealdb.com/images/category/side.png"),
+    MealCategories("10", "Starter",
+        "https://www.themealdb.com/images/category/starter.png"),
+    MealCategories(
+        "11", "Vegan", "https://www.themealdb.com/images/category/vegan.png"),
+    MealCategories("12", "Vegetarian",
+        "https://www.themealdb.com/images/category/vegetarian.png"),
   ];
 }

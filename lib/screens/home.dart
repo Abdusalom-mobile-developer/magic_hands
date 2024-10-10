@@ -113,27 +113,33 @@ class HomeScreen extends StatelessWidget {
                 ),
                 CustomWidgets.height(context, 50),
                 SizedBox(
-                  height: CustomMethods.mediaWidth(context, 6),
+                  height: CustomMethods.mediaWidth(context, 7.7),
                   child: ListView.builder(
-                    itemCount: provider.categoriesInfo.length,
+                    itemCount: provider.mealCategories.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => Container(
-                      margin: const EdgeInsets.only(right: 12),
-                      height: CustomMethods.mediaWidth(context, 6),
-                      width: CustomMethods.mediaWidth(context, 4),
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(7),
+                      margin: index != provider.mealCategories.length - 1
+                          ? const EdgeInsets.only(right: 12)
+                          : const EdgeInsets.only(right: 0),
+                      height: CustomMethods.mediaWidth(context, 7.7),
+                      width: CustomMethods.mediaWidth(context, 3.4),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: ColorsClass.bgColor,
-                        image: DecorationImage(
-                            image: AssetImage(
-                                provider.categoriesInfo[index].imgPath),
-                            fit: BoxFit.cover),
-                        border: Border.all(color: ColorsClass.black, width: 1),
+                        color: ColorsClass.darkRed.withOpacity(0.16),
+                      ),
+                      child: Text(
+                        provider.mealCategories[index].strCategory,
+                        style: TextStyle(
+                            color: ColorsClass.black,
+                            fontSize: CustomMethods.mediaWidth(context, 28),
+                            fontFamily: "Fredoka"),
                       ),
                     ),
                   ),
                 ),
-                CustomWidgets.height(context, 20),
+                CustomWidgets.height(context, 30),
                 Text(
                   "Recomendations",
                   style: TextStyle(

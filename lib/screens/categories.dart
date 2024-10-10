@@ -103,39 +103,33 @@ class CategoriesScreen extends StatelessWidget {
                           child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 1.2 / 1,
+                          childAspectRatio: 1.1 / 1,
                           crossAxisSpacing:
                               CustomMethods.mediaWidth(context, 30),
                           mainAxisSpacing:
                               CustomMethods.mediaWidth(context, 50),
                         ),
-                        itemCount: provider.categoriesInfo.length,
+                        itemCount: provider.mealCategories.length,
                         itemBuilder: (context, index) => Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
                               child: Container(
-                                  decoration: BoxDecoration(
+                                padding: const EdgeInsets.all(9),
+                                decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                        image: AssetImage(provider
-                                            .categoriesInfo[index].imgPath),
-                                        fit: BoxFit.cover),
-                                    color: ColorsClass.bgColor,
-                                  ),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    gradient: LinearGradient(
-                                        begin: Alignment.bottomLeft,
-                                        colors: [
-                                          Colors.black.withOpacity(0.18),
-                                          Colors.black.withOpacity(0.2)
-                                        ]),
-                                  ))),
+                                    // color: Colors.grey.withOpacity(0.3),
+                                    color:
+                                        ColorsClass.darkRed.withOpacity(0.18)),
+                                child: Image(
+                                  image: NetworkImage(provider
+                                      .mealCategories[index].strCategoryThumb),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                             Text(
-                              provider.categoriesInfo[index].name,
+                              provider.mealCategories[index].strCategory,
                               style: TextStyle(
                                   color: ColorsClass.black,
                                   fontSize:
