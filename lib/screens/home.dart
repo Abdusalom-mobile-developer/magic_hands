@@ -38,8 +38,8 @@ class HomeScreen extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border(
                     bottom: BorderSide(
-                        color: ColorsClass.black.withOpacity(0.5),
-                        width: 1.3))),
+                        color: ColorsClass.darkRed.withOpacity(0.3),
+                        width: 2))),
             padding: EdgeInsets.symmetric(
                 horizontal: CustomMethods.mediaWidth(context, 20)),
             width: double.infinity,
@@ -50,7 +50,9 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    // Top Part
                     Expanded(
+                      // Top Left Texts Part
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -71,18 +73,15 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
+                    // Top Right Image Part
+                    Image(
+                      image: const AssetImage(ImgPath.ramen),
                       width: CustomMethods.mediaWidth(context, 4),
-                      height: CustomMethods.mediaWidth(context, 4),
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: AssetImage(ImgPath.logo),
-                              fit: BoxFit.cover)),
-                    )
+                    ),
                   ],
                 ),
                 CustomWidgets.height(context, 16),
+                // Top Big Button Part 
                 Container(
                     height: CustomMethods.mediaWidth(context, 6.8),
                     width: double.infinity,
@@ -104,6 +103,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     )),
                 CustomWidgets.height(context, 20),
+                // Categories Part
                 Text(
                   "Categories",
                   style: TextStyle(
@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 CustomWidgets.height(context, 50),
                 SizedBox(
-                  height: CustomMethods.mediaWidth(context, 7.7),
+                  height: CustomMethods.mediaWidth(context, 8),
                   child: ListView.builder(
                     itemCount: provider.mealCategories.length,
                     scrollDirection: Axis.horizontal,
@@ -123,7 +123,7 @@ class HomeScreen extends StatelessWidget {
                       margin: index != provider.mealCategories.length - 1
                           ? const EdgeInsets.only(right: 12)
                           : const EdgeInsets.only(right: 0),
-                      height: CustomMethods.mediaWidth(context, 7.7),
+                      height: CustomMethods.mediaWidth(context, 8),
                       width: CustomMethods.mediaWidth(context, 3.4),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -140,13 +140,59 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 CustomWidgets.height(context, 30),
-                Text(
-                  "Recomendations",
-                  style: TextStyle(
-                      color: ColorsClass.black,
-                      fontSize: CustomMethods.mediaWidth(context, 18),
-                      fontFamily: "Fredoka"),
-                ),
+                //Bottom Recomendations Part
+                Expanded(
+                    child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Recomendations",
+                        style: TextStyle(
+                            color: ColorsClass.black,
+                            fontSize: CustomMethods.mediaWidth(context, 18),
+                            fontFamily: "Fredoka"),
+                      ),
+                      CustomWidgets.height(context, 50),
+                      SizedBox(
+                        height: CustomMethods.mediaHeight(context, 4.3),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 10,
+                          itemBuilder: (context, index) => Container(
+                            margin: const EdgeInsets.only(right: 12),
+                            height: CustomMethods.mediaHeight(context, 4.3),
+                            width: CustomMethods.mediaWidth(context, 2),
+                            color: ColorsClass.darkRed,
+                          ),
+                        ),
+                      ),
+                      CustomWidgets.height(context, 30),
+                      Text(
+                        "Recomendations",
+                        style: TextStyle(
+                            color: ColorsClass.black,
+                            fontSize: CustomMethods.mediaWidth(context, 18),
+                            fontFamily: "Fredoka"),
+                      ),
+                      CustomWidgets.height(context, 50),
+                      SizedBox(
+                        height: CustomMethods.mediaHeight(context, 4.3),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 10,
+                          itemBuilder: (context, index) => Container(
+                            margin: const EdgeInsets.only(right: 12),
+                            height: CustomMethods.mediaHeight(context, 4.3),
+                            width: CustomMethods.mediaWidth(context, 1.4),
+                            color: ColorsClass.darkRed,
+                          ),
+                        ),
+                      ),
+                      CustomWidgets.height(context, 10),
+                    ],
+                  ),
+                ))
               ],
             ),
           ))),

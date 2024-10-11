@@ -34,8 +34,8 @@ class CategoriesScreen extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border(
                     bottom: BorderSide(
-                        color: ColorsClass.black.withOpacity(0.5),
-                        width: 1.3))),
+                        color: ColorsClass.darkRed.withOpacity(0.3),
+                        width: 2))),
             padding: EdgeInsets.symmetric(
               horizontal: CustomMethods.mediaWidth(context, 20),
             ),
@@ -87,7 +87,7 @@ class CategoriesScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "Explore a world of food! Click any countrie's flag to see the options.",
+                              "Explore a world of food! Click any type of food to see the options.",
                               style: TextStyle(
                                   color: ColorsClass.black.withOpacity(0.5),
                                   fontSize:

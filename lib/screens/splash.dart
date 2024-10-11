@@ -28,13 +28,13 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(milliseconds: 2100),
       () {
-        // bool? check = HiveCrud.read(HiveKeys.isFirst);
-        // if (check == false) {
-        //   context.go("/home");
-        // } else {
-        //   context.go("/onboarding");
-        // }
-        context.go("/onboarding");
+        bool? check = HiveCrud.read(HiveKeys.isFirst);
+        if (check == false) {
+          context.go("/home");
+        } else {
+          context.go("/onboarding");
+        }
+        // context.go("/onboarding");
       },
     );
   }
