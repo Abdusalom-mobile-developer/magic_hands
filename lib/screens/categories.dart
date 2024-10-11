@@ -42,27 +42,6 @@ class CategoriesScreen extends StatelessWidget {
             width: double.infinity,
             child: Stack(
               children: [
-                // Container(
-                //   height: CustomMethods.mediaWidth(context, 2.1),
-                //   width: double.infinity,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(10),
-                //     image: const DecorationImage(
-                //         image: AssetImage(ImgPath.vartFood6),
-                //         fit: BoxFit.cover),
-                //     color: ColorsClass.bgColor,
-                //   ),
-                //   child: Container(
-                //       decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(10),
-                //     gradient: LinearGradient(
-                //         begin: Alignment.bottomLeft,
-                //         colors: [
-                //           Colors.black.withOpacity(0.2),
-                //           Colors.black.withOpacity(0.2)
-                //         ]),
-                //   )),
-                // ),
                 Transform.translate(
                   offset: Offset(0, -CustomMethods.mediaWidth(context, 7)),
                   child: Image(
@@ -70,7 +49,6 @@ class CategoriesScreen extends StatelessWidget {
                     height: CustomMethods.mediaWidth(context, 1),
                   ),
                 ),
-                // CustomWidgets.height(context, 24),
                 SizedBox(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,16 +93,22 @@ class CategoriesScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Container(
+                                width: double.infinity,
                                 padding: const EdgeInsets.all(9),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    // color: Colors.grey.withOpacity(0.3),
                                     color:
                                         ColorsClass.darkRed.withOpacity(0.18)),
-                                child: Image(
+                                child: FadeInImage(
+                                  placeholderFit: BoxFit.scaleDown,
+                                  placeholder:
+                                      const AssetImage(ImgPath.placeholder2),
                                   image: NetworkImage(provider
                                       .mealCategories[index].strCategoryThumb),
                                   fit: BoxFit.cover,
+                                  fadeInDuration:
+                                      const Duration(milliseconds: 2),
+                                  fadeInCurve: Curves.easeInCirc,
                                 ),
                               ),
                             ),
