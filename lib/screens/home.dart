@@ -181,8 +181,8 @@ class HomeScreen extends StatelessWidget {
                                     gradient: LinearGradient(
                                         begin: Alignment.bottomCenter,
                                         colors: [
-                                          ColorsClass.black.withOpacity(0.07),
-                                          ColorsClass.black.withOpacity(0.07)
+                                          ColorsClass.black.withOpacity(0.13),
+                                          ColorsClass.black.withOpacity(0.13)
                                         ]),
                                     borderRadius: BorderRadius.circular(10)),
                                 child: Column(
@@ -194,8 +194,8 @@ class HomeScreen extends StatelessWidget {
                                           context, 20),
                                       width: double.infinity,
                                       decoration: BoxDecoration(
-                                          color: ColorsClass.black
-                                              .withOpacity(0.5),
+                                          color: ColorsClass.darkRed
+                                              .withOpacity(0.67),
                                           borderRadius: const BorderRadius.only(
                                               bottomLeft: Radius.circular(10),
                                               bottomRight:
@@ -216,7 +216,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       CustomWidgets.height(context, 25),
                       Text(
-                        "Recomendations",
+                        "Popular",
                         style: TextStyle(
                             color: ColorsClass.black,
                             fontSize: CustomMethods.mediaWidth(context, 18),
@@ -224,16 +224,63 @@ class HomeScreen extends StatelessWidget {
                       ),
                       CustomWidgets.height(context, 50),
                       SizedBox(
-                        height: CustomMethods.mediaHeight(context, 4.3),
+                        height: CustomMethods.mediaHeight(context, 4),
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 10,
+                          itemCount: provider.listOfPopularMeals.length,
                           itemBuilder: (context, index) => Container(
-                            margin: const EdgeInsets.only(right: 12),
-                            height: CustomMethods.mediaHeight(context, 4.3),
-                            width: CustomMethods.mediaWidth(context, 1.4),
-                            color: ColorsClass.darkRed,
-                          ),
+                              margin: index !=
+                                      provider.listOfPopularMeals.length - 1
+                                  ? const EdgeInsets.only(right: 22)
+                                  : const EdgeInsets.only(right: 0),
+                              height: CustomMethods.mediaHeight(context, 4),
+                              width: CustomMethods.mediaWidth(context, 1.4),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(provider
+                                        .listOfPopularMeals[index]
+                                        .strMealThumb),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment.bottomCenter,
+                                      colors: [
+                                        ColorsClass.black.withOpacity(0.15),
+                                        ColorsClass.black.withOpacity(0.15)
+                                      ]),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: CustomMethods.mediaHeight(
+                                          context, 20),
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                          color: ColorsClass.darkRed
+                                              .withOpacity(0.67),
+                                          borderRadius: const BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              bottomRight:
+                                                  Radius.circular(10))),
+                                      child: Text(
+                                        provider
+                                            .listOfPopularMeals[index].strMeal,
+                                        style: TextStyle(
+                                            color: ColorsClass.bgColor,
+                                            fontSize: CustomMethods.mediaWidth(
+                                                context, 24),
+                                            fontFamily: "Fredoka"),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )),
                         ),
                       ),
                       CustomWidgets.height(context, 18),

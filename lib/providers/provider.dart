@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_hands/moduls/categories_info.dart';
 import 'package:magic_hands/moduls/meal_categories.dart';
+import 'package:magic_hands/moduls/popular_meals.dart';
 import 'package:magic_hands/moduls/recomendation_food_info.dart';
 
 class ProvidersClass extends ChangeNotifier {
@@ -126,5 +127,18 @@ class ProvidersClass extends ChangeNotifier {
         "Japanese Katsudon",
         "https://www.themealdb.com/images/media/meals/d8f6qx1604182128.jpg",
         "53034")
+  ];
+
+  List<PopularMeals> listOfPopularMeals = [
+    PopularMeals("Ma Po Tofu", "https://www.themealdb.com/images/media/meals/1525874812.jpg", "52947"),
+    PopularMeals("Tandoori chicken", "https://www.themealdb.com/images/media/meals/qptpvt1487339892.jpg", "52806"),
+    PopularMeals("Christmas cake", "https://www.themealdb.com/images/media/meals/ldnrm91576791881.jpg", "52990"),
+    PopularMeals("Tunisian Lamb Soup", "https://www.themealdb.com/images/media/meals/t8mn9g1560460231.jpg", "52972"),
+    PopularMeals("Turkey Meatloaf", "https://www.themealdb.com/images/media/meals/ypuxtw1511297463.jpg", "52845"),
+    PopularMeals("Pilchard puttanesca", "https://www.themealdb.com/images/media/meals/vvtvtr1511180578.jpg", "52837"),
+    PopularMeals("Bigos (Hunters Stew)", "https://www.themealdb.com/images/media/meals/md8w601593348504.jpg", "53018"),
+    PopularMeals("Tuna and Egg Briks", "https://www.themealdb.com/images/media/meals/2dsltq1560461468.jpg", "52975"),
+    PopularMeals("Split Pea Soup", "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg", "52925"),
+    PopularMeals("Creamy Tomato Soup", "https://www.themealdb.com/images/media/meals/stpuws1511191310.jpg", "52841"),
   ];
 }
