@@ -81,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 CustomWidgets.height(context, 16),
-                // Top Big Button Part 
+                // Top Big Button Part
                 Container(
                     height: CustomMethods.mediaWidth(context, 6.8),
                     width: double.infinity,
@@ -139,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                CustomWidgets.height(context, 30),
+                CustomWidgets.height(context, 25),
                 //Bottom Recomendations Part
                 Expanded(
                     child: SingleChildScrollView(
@@ -155,19 +155,66 @@ class HomeScreen extends StatelessWidget {
                       ),
                       CustomWidgets.height(context, 50),
                       SizedBox(
-                        height: CustomMethods.mediaHeight(context, 4.3),
+                        height: CustomMethods.mediaHeight(context, 5.3),
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 10,
+                          itemCount: provider.recomendations.length,
                           itemBuilder: (context, index) => Container(
-                            margin: const EdgeInsets.only(right: 12),
-                            height: CustomMethods.mediaHeight(context, 4.3),
-                            width: CustomMethods.mediaWidth(context, 2),
-                            color: ColorsClass.darkRed,
-                          ),
+                              margin:
+                                  index != provider.recomendations.length - 1
+                                      ? const EdgeInsets.only(right: 18)
+                                      : const EdgeInsets.only(right: 0),
+                              height: CustomMethods.mediaHeight(context, 5.3),
+                              width: CustomMethods.mediaWidth(context, 2),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(provider
+                                        .recomendations[index].strMealThumb),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  color: ColorsClass.darkRed.withOpacity(0.16),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        colors: [
+                                          ColorsClass.black.withOpacity(0.07),
+                                          ColorsClass.black.withOpacity(0.07)
+                                        ]),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: CustomMethods.mediaHeight(
+                                          context, 20),
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                          color: ColorsClass.black
+                                              .withOpacity(0.5),
+                                          borderRadius: const BorderRadius.only(
+                                              bottomLeft: Radius.circular(10),
+                                              bottomRight:
+                                                  Radius.circular(10))),
+                                      child: Text(
+                                        provider.recomendations[index].strMeal,
+                                        style: TextStyle(
+                                            color: ColorsClass.bgColor,
+                                            fontSize: CustomMethods.mediaWidth(
+                                                context, 24),
+                                            fontFamily: "Fredoka"),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )),
                         ),
                       ),
-                      CustomWidgets.height(context, 30),
+                      CustomWidgets.height(context, 25),
                       Text(
                         "Recomendations",
                         style: TextStyle(
@@ -189,7 +236,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      CustomWidgets.height(context, 10),
+                      CustomWidgets.height(context, 18),
                     ],
                   ),
                 ))

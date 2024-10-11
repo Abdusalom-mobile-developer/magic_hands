@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_hands/moduls/categories_info.dart';
 import 'package:magic_hands/moduls/meal_categories.dart';
+import 'package:magic_hands/moduls/recomendation_food_info.dart';
 
 class ProvidersClass extends ChangeNotifier {
   bool _hadError = false;
@@ -82,5 +83,48 @@ class ProvidersClass extends ChangeNotifier {
         "11", "Vegan", "https://www.themealdb.com/images/category/vegan.png"),
     MealCategories("12", "Vegetarian",
         "https://www.themealdb.com/images/category/vegetarian.png"),
+  ];
+
+  List<RecomendationFoodInfo> recomendations = [
+    RecomendationFoodInfo(
+        "French Omelette",
+        "https://www.themealdb.com/images/media/meals/yvpuuy1511797244.jpg",
+        "52915"),
+    RecomendationFoodInfo(
+        "Lasagne",
+        "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg",
+        "52844"),
+    RecomendationFoodInfo(
+        "Burek",
+        "https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg",
+        "53051"),
+    RecomendationFoodInfo(
+        "Nasi lemak",
+        "https://www.themealdb.com/images/media/meals/wai9bw1619788844.jpg",
+        "53051"),
+    RecomendationFoodInfo(
+        "Chicken Basquaise",
+        "https://www.themealdb.com/images/media/meals/wruvqv1511880994.jpg",
+        "52934"),
+    RecomendationFoodInfo(
+        "Blackberry Fool",
+        "https://www.themealdb.com/images/media/meals/rpvptu1511641092.jpg",
+        "52891"),
+    RecomendationFoodInfo(
+        "Clam chowder",
+        "https://www.themealdb.com/images/media/meals/rvtvuw1511190488.jpg",
+        "52840"),
+    RecomendationFoodInfo(
+        "Vegan Lasagna",
+        "https://www.themealdb.com/images/media/meals/rvxxuy1468312893.jpg",
+        "52775"),
+    RecomendationFoodInfo(
+        "Flamiche",
+        "https://www.themealdb.com/images/media/meals/wssvvs1511785879.jpg",
+        "52906"),
+    RecomendationFoodInfo(
+        "Japanese Katsudon",
+        "https://www.themealdb.com/images/media/meals/d8f6qx1604182128.jpg",
+        "53034")
   ];
 }
