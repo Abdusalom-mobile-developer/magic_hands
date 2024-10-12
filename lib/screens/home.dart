@@ -159,59 +159,69 @@ class HomeScreen extends StatelessWidget {
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: provider.recomendations.length,
-                          itemBuilder: (context, index) => Container(
-                              margin:
-                                  index != provider.recomendations.length - 1
-                                      ? const EdgeInsets.only(right: 18)
-                                      : const EdgeInsets.only(right: 0),
-                              height: CustomMethods.mediaHeight(context, 5.3),
-                              width: CustomMethods.mediaWidth(context, 2),
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(provider
-                                        .recomendations[index].strMealThumb),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  color: ColorsClass.darkRed.withOpacity(0.16),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: double.infinity,
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () {
+                              context.push("/recipe");
+                            },
+                            child: Container(
+                                margin:
+                                    index != provider.recomendations.length - 1
+                                        ? const EdgeInsets.only(right: 18)
+                                        : const EdgeInsets.only(right: 0),
+                                height: CustomMethods.mediaHeight(context, 5.3),
+                                width: CustomMethods.mediaWidth(context, 2),
                                 decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        begin: Alignment.bottomCenter,
-                                        colors: [
-                                          ColorsClass.black.withOpacity(0.13),
-                                          ColorsClass.black.withOpacity(0.13)
-                                        ]),
+                                    image: DecorationImage(
+                                      image: NetworkImage(provider
+                                          .recomendations[index].strMealThumb),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    color:
+                                        ColorsClass.darkRed.withOpacity(0.16),
                                     borderRadius: BorderRadius.circular(10)),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: CustomMethods.mediaHeight(
-                                          context, 20),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          color: ColorsClass.darkRed
-                                              .withOpacity(0.67),
-                                          borderRadius: const BorderRadius.only(
-                                              bottomLeft: Radius.circular(10),
-                                              bottomRight:
-                                                  Radius.circular(10))),
-                                      child: Text(
-                                        provider.recomendations[index].strMeal,
-                                        style: TextStyle(
-                                            color: ColorsClass.bgColor,
-                                            fontSize: CustomMethods.mediaWidth(
-                                                context, 24),
-                                            fontFamily: "Fredoka"),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          begin: Alignment.bottomCenter,
+                                          colors: [
+                                            ColorsClass.black.withOpacity(0.13),
+                                            ColorsClass.black.withOpacity(0.13)
+                                          ]),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: CustomMethods.mediaHeight(
+                                            context, 20),
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            color: ColorsClass.darkRed
+                                                .withOpacity(0.67),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(10),
+                                                    bottomRight:
+                                                        Radius.circular(10))),
+                                        child: Text(
+                                          provider
+                                              .recomendations[index].strMeal,
+                                          style: TextStyle(
+                                              color: ColorsClass.bgColor,
+                                              fontSize:
+                                                  CustomMethods.mediaWidth(
+                                                      context, 24),
+                                              fontFamily: "Fredoka"),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          ),
                         ),
                       ),
                       CustomWidgets.height(context, 25),
@@ -228,59 +238,67 @@ class HomeScreen extends StatelessWidget {
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: provider.listOfPopularMeals.length,
-                          itemBuilder: (context, index) => Container(
-                              margin: index !=
-                                      provider.listOfPopularMeals.length - 1
-                                  ? const EdgeInsets.only(right: 22)
-                                  : const EdgeInsets.only(right: 0),
-                              height: CustomMethods.mediaHeight(context, 4),
-                              width: CustomMethods.mediaWidth(context, 1.4),
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(provider
-                                        .listOfPopularMeals[index]
-                                        .strMealThumb),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Container(
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () {
+                              context.push("/recipe");
+                            },
+                            child: Container(
+                                margin: index !=
+                                        provider.listOfPopularMeals.length - 1
+                                    ? const EdgeInsets.only(right: 22)
+                                    : const EdgeInsets.only(right: 0),
+                                height: CustomMethods.mediaHeight(context, 4),
+                                width: CustomMethods.mediaWidth(context, 1.4),
                                 decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.bottomCenter,
-                                      colors: [
-                                        ColorsClass.black.withOpacity(0.15),
-                                        ColorsClass.black.withOpacity(0.15)
-                                      ]),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: CustomMethods.mediaHeight(
-                                          context, 20),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          color: ColorsClass.darkRed
-                                              .withOpacity(0.67),
-                                          borderRadius: const BorderRadius.only(
-                                              bottomLeft: Radius.circular(10),
-                                              bottomRight:
-                                                  Radius.circular(10))),
-                                      child: Text(
-                                        provider
-                                            .listOfPopularMeals[index].strMeal,
-                                        style: TextStyle(
-                                            color: ColorsClass.bgColor,
-                                            fontSize: CustomMethods.mediaWidth(
-                                                context, 24),
-                                            fontFamily: "Fredoka"),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )),
+                                    image: DecorationImage(
+                                      image: NetworkImage(provider
+                                          .listOfPopularMeals[index]
+                                          .strMealThumb),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        colors: [
+                                          ColorsClass.black.withOpacity(0.15),
+                                          ColorsClass.black.withOpacity(0.15)
+                                        ]),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: CustomMethods.mediaHeight(
+                                            context, 20),
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            color: ColorsClass.darkRed
+                                                .withOpacity(0.67),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(10),
+                                                    bottomRight:
+                                                        Radius.circular(10))),
+                                        child: Text(
+                                          provider.listOfPopularMeals[index]
+                                              .strMeal,
+                                          style: TextStyle(
+                                              color: ColorsClass.bgColor,
+                                              fontSize:
+                                                  CustomMethods.mediaWidth(
+                                                      context, 24),
+                                              fontFamily: "Fredoka"),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                          ),
                         ),
                       ),
                       CustomWidgets.height(context, 18),

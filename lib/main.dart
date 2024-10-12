@@ -5,6 +5,7 @@ import 'package:magic_hands/providers/provider.dart';
 import 'package:magic_hands/screens/categories.dart';
 import 'package:magic_hands/screens/home.dart';
 import 'package:magic_hands/screens/onboarding.dart';
+import 'package:magic_hands/screens/recipe.dart';
 import 'package:magic_hands/screens/register.dart';
 import 'package:magic_hands/screens/splash.dart';
 import 'package:provider/provider.dart';
@@ -110,6 +111,21 @@ class MyApp extends StatelessWidget {
           key: state.pageKey,
           transitionDuration: const Duration(milliseconds: 300),
           child: const CategoriesScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    ),
+    GoRoute(
+      path: "/recipe",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          transitionDuration: const Duration(milliseconds: 250),
+          child: const RecipeScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),

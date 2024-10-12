@@ -92,5 +92,53 @@ class CustomWidgets {
       ),
     );
   }
-  
+
+  static ingredientsRowMaker(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Transform.translate(
+              offset: Offset(0, CustomMethods.mediaWidth(context, 280)),
+              child: Icon(
+                Icons.circle,
+                color: ColorsClass.black,
+                size: CustomMethods.mediaWidth(context, 38),
+              ),
+            ),
+            CustomWidgets.width(context, 62),
+            Text(
+              "Eggs",
+              style: TextStyle(
+                  color: ColorsClass.black.withOpacity(0.5),
+                  fontSize: CustomMethods.mediaWidth(context, 21),
+                  fontFamily: "Fredoka"),
+            ),
+          ],
+        ),
+        Expanded(
+            child: Transform.translate(
+          offset: Offset(0, CustomMethods.mediaWidth(context, 200)),
+          child: Container(
+            margin: EdgeInsets.symmetric(
+                horizontal: CustomMethods.mediaWidth(context, 50)),
+            height: CustomMethods.mediaWidth(context, 250),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: ColorsClass.black.withOpacity(0.5)),
+          ),
+        )),
+        Text(
+          "450g",
+          style: TextStyle(
+              color: ColorsClass.black.withOpacity(0.5),
+              fontSize: CustomMethods.mediaWidth(context, 21),
+              fontFamily: "Fredoka"),
+        ),
+      ],
+    );
+  }
 }
