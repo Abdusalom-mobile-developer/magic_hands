@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
+import 'package:magic_hands/main.dart';
 import 'package:magic_hands/providers/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -92,23 +94,29 @@ class CategoriesScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
-                              child: Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.all(9),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color:
-                                        ColorsClass.darkRed.withOpacity(0.18)),
-                                child: FadeInImage(
-                                  placeholderFit: BoxFit.scaleDown,
-                                  placeholder:
-                                      const AssetImage(ImgPath.placeholder2),
-                                  image: NetworkImage(provider
-                                      .mealCategories[index].strCategoryThumb),
-                                  fit: BoxFit.cover,
-                                  fadeInDuration:
-                                      const Duration(milliseconds: 2),
-                                  fadeInCurve: Curves.easeInCirc,
+                              child: GestureDetector(
+                                onTap: () {
+                                  context.push("/meal_options");
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.all(9),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: ColorsClass.darkRed
+                                          .withOpacity(0.18)),
+                                  child: FadeInImage(
+                                    placeholderFit: BoxFit.scaleDown,
+                                    placeholder:
+                                        const AssetImage(ImgPath.placeholder2),
+                                    image: NetworkImage(provider
+                                        .mealCategories[index]
+                                        .strCategoryThumb),
+                                    fit: BoxFit.cover,
+                                    fadeInDuration:
+                                        const Duration(milliseconds: 2),
+                                    fadeInCurve: Curves.easeInCirc,
+                                  ),
                                 ),
                               ),
                             ),

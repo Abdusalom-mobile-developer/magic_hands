@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:magic_hands/config/colors.dart';
-import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
 import 'package:magic_hands/providers/provider.dart';
@@ -49,15 +48,15 @@ class RecipeScreen extends StatelessWidget {
                                 fit: BoxFit.cover)),
                       )),
                   Transform.translate(
-                    offset: const Offset(0, -7),
+                    offset: Offset(0, -CustomMethods.mediaWidth(context, 40)),
                     child: Container(
-                      height: CustomMethods.mediaWidth(context, 30),
+                      height: CustomMethods.mediaWidth(context, 40),
                       width: double.infinity,
                       decoration: const BoxDecoration(
                           color: ColorsClass.bgColor,
                           borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(25),
-                              topRight: Radius.circular(25))),
+                              topLeft: Radius.circular(50),
+                              topRight: Radius.circular(50))),
                     ),
                   ),
                   Expanded(
@@ -73,7 +72,7 @@ class RecipeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Transform.translate(
-                              offset: const Offset(0, -2),
+                              offset: const Offset(0, -5),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -112,15 +111,16 @@ class RecipeScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    padding: const EdgeInsets.all(9),
+                                    padding: EdgeInsets.all(
+                                        CustomMethods.mediaWidth(context, 80)),
                                     decoration: BoxDecoration(
                                         color: ColorsClass.darkRed
                                             .withOpacity(0.4),
                                         borderRadius:
                                             BorderRadius.circular(12)),
                                     height:
-                                        CustomMethods.mediaHeight(context, 13),
-                                    width: CustomMethods.mediaWidth(context, 6),
+                                        CustomMethods.mediaHeight(context, 15),
+                                    width: CustomMethods.mediaWidth(context, 7),
                                     child: Image(
                                       image: NetworkImage(provider
                                           .mealCategories[4].strCategoryThumb),

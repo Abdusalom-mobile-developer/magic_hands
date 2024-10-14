@@ -4,6 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:magic_hands/providers/provider.dart';
 import 'package:magic_hands/screens/categories.dart';
 import 'package:magic_hands/screens/home.dart';
+import 'package:magic_hands/screens/meal_options.dart';
 import 'package:magic_hands/screens/onboarding.dart';
 import 'package:magic_hands/screens/recipe.dart';
 import 'package:magic_hands/screens/register.dart';
@@ -129,6 +130,21 @@ class MyApp extends StatelessWidget {
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    ),
+    GoRoute(
+      path: "/meal_options",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          transitionDuration: const Duration(milliseconds: 250),
+          child: const MealOptions(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInBack).animate(animation),
               child: child,
             );
           },
