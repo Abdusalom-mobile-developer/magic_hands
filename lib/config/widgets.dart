@@ -93,7 +93,7 @@ class CustomWidgets {
     );
   }
 
-  static ingredientsRowMaker(BuildContext context) {
+  static ingredientsRowMaker(BuildContext context, String strIngre, String measure) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -110,8 +110,8 @@ class CustomWidgets {
               ),
             ),
             CustomWidgets.width(context, 62),
-            Text(
-              "Eggs",
+            Text(strIngre
+              ,
               style: TextStyle(
                   color: ColorsClass.black.withOpacity(0.5),
                   fontSize: CustomMethods.mediaWidth(context, 21),
@@ -132,7 +132,7 @@ class CustomWidgets {
           ),
         )),
         Text(
-          "450g",
+          measure,
           style: TextStyle(
               color: ColorsClass.black.withOpacity(0.5),
               fontSize: CustomMethods.mediaWidth(context, 21),

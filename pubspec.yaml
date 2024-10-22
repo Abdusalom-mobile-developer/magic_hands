@@ -17,6 +17,8 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.0.0
+  http: ^1.2.2
+  logger: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +27,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   hive_generator: ^1.1.0
   build_runner: ^2.1.0
+  
 
 flutter:
 

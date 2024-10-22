@@ -119,6 +119,8 @@ class HomeScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
+                        provider.getAllOptions(provider
+                                      .mealCategories[index].strCategory);
                         context.go("/meal_options");
                       },
                       child: Container(

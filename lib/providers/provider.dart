@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart';
+import 'package:magic_hands/config/widgets.dart';
 import 'package:magic_hands/moduls/categories_info.dart';
 import 'package:magic_hands/moduls/meal_categories.dart';
 import 'package:magic_hands/moduls/popular_meals.dart';
 import 'package:magic_hands/moduls/recomendation_food_info.dart';
+import 'package:magic_hands/services/log.dart';
 
 class ProvidersClass extends ChangeNotifier {
   bool _hadError = false;
@@ -130,15 +135,121 @@ class ProvidersClass extends ChangeNotifier {
   ];
 
   List<PopularMeals> listOfPopularMeals = [
-    PopularMeals("Ma Po Tofu", "https://www.themealdb.com/images/media/meals/1525874812.jpg", "52947"),
-    PopularMeals("Tandoori chicken", "https://www.themealdb.com/images/media/meals/qptpvt1487339892.jpg", "52806"),
-    PopularMeals("Christmas cake", "https://www.themealdb.com/images/media/meals/ldnrm91576791881.jpg", "52990"),
-    PopularMeals("Tunisian Lamb Soup", "https://www.themealdb.com/images/media/meals/t8mn9g1560460231.jpg", "52972"),
-    PopularMeals("Turkey Meatloaf", "https://www.themealdb.com/images/media/meals/ypuxtw1511297463.jpg", "52845"),
-    PopularMeals("Pilchard puttanesca", "https://www.themealdb.com/images/media/meals/vvtvtr1511180578.jpg", "52837"),
-    PopularMeals("Bigos (Hunters Stew)", "https://www.themealdb.com/images/media/meals/md8w601593348504.jpg", "53018"),
-    PopularMeals("Tuna and Egg Briks", "https://www.themealdb.com/images/media/meals/2dsltq1560461468.jpg", "52975"),
-    PopularMeals("Split Pea Soup", "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg", "52925"),
-    PopularMeals("Creamy Tomato Soup", "https://www.themealdb.com/images/media/meals/stpuws1511191310.jpg", "52841"),
+    PopularMeals("Ma Po Tofu",
+        "https://www.themealdb.com/images/media/meals/1525874812.jpg", "52947"),
+    PopularMeals(
+        "Tandoori chicken",
+        "https://www.themealdb.com/images/media/meals/qptpvt1487339892.jpg",
+        "52806"),
+    PopularMeals(
+        "Christmas cake",
+        "https://www.themealdb.com/images/media/meals/ldnrm91576791881.jpg",
+        "52990"),
+    PopularMeals(
+        "Tunisian Lamb Soup",
+        "https://www.themealdb.com/images/media/meals/t8mn9g1560460231.jpg",
+        "52972"),
+    PopularMeals(
+        "Turkey Meatloaf",
+        "https://www.themealdb.com/images/media/meals/ypuxtw1511297463.jpg",
+        "52845"),
+    PopularMeals(
+        "Pilchard puttanesca",
+        "https://www.themealdb.com/images/media/meals/vvtvtr1511180578.jpg",
+        "52837"),
+    PopularMeals(
+        "Bigos (Hunters Stew)",
+        "https://www.themealdb.com/images/media/meals/md8w601593348504.jpg",
+        "53018"),
+    PopularMeals(
+        "Tuna and Egg Briks",
+        "https://www.themealdb.com/images/media/meals/2dsltq1560461468.jpg",
+        "52975"),
+    PopularMeals(
+        "Split Pea Soup",
+        "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
+        "52925"),
+    PopularMeals(
+        "Creamy Tomato Soup",
+        "https://www.themealdb.com/images/media/meals/stpuws1511191310.jpg",
+        "52841"),
   ];
+
+  List<RecomendationFoodInfo> list = [];
+
+  Future<void> getAllOptions(String category) async {
+    list.clear();
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=$category"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list.add(RecomendationFoodInfo(
+              elem["strMeal"], elem["strMealThumb"], elem["idMeal"]));
+        }
+        notifyListeners();
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Map<String, dynamic> chosenOption = {
+    "strMeal": "",
+    "strCategory": "",
+    "strArea": "",
+    "strInstructions": "",
+    "strMealThumb":
+        "https://i.pinimg.com/474x/6a/f1/ec/6af1ec6645410a41d5339508a83b86f9.jpg",
+    "strYoutube": "",
+    "listOfIngredients": <Widget>[],
+  };
+
+  Future<void> getChosenOptionData(int optionId, BuildContext context) async {
+    final response = await get(Uri.parse(
+        "https://www.themealdb.com/api/json/v1/1/lookup.php?i=$optionId"));
+    try {
+      if (response.statusCode == 200) {
+        final body = jsonDecode(response.body);
+        List<Widget> listOfRowMakerIngredients = [];
+        List<String> listOfIngredients = [];
+        List<String> listOfIngredientsMeasure = [];
+        for (int i = 1; i < 9; i++) {
+          if (body["meals"][0]["strIngredient$i"] == "" ||
+              body["meals"][0]["strIngredient$i"] == null) {
+            break;
+          } else {
+            listOfIngredients.add(body["meals"][0]["strIngredient$i"]);
+            listOfIngredientsMeasure.add(body["meals"][0]["strMeasure$i"]);
+          }
+        }
+
+        // for (int i = 0; i < listOfIngredients.length; i++) {
+        //   listOfRowMakerIngredients.add(CustomWidgets.ingredientsRowMaker(
+        //       // ignore: use_build_context_synchronously
+        //       context,
+        //       listOfIngredients[i],
+        //       listOfIngredientsMeasure[i]));
+        // }
+
+        chosenOption["strMeal"] = body["meals"][0]["strMeal"];
+        chosenOption["strCategory"] = body["meals"][0]["strCategory"];
+        chosenOption["strArea"] = body["meals"][0]["strArea"];
+        chosenOption["strInstructions"] = body["meals"][0]["strInstructions"]
+            .toString()
+            .replaceAll("\r\n", "");
+        chosenOption["strMealThumb"] = body["meals"][0]["strMealThumb"];
+        chosenOption["strYoutube"] = body["meals"][0]["strYoutube"];
+        chosenOption["listOfIngredients"] = listOfRowMakerIngredients;
+        notifyListeners();
+      }
+    } catch (e) {
+      LogService.e(e.toString()+" damn fuck it");
+      LogService.e(response.body);
+    }
+  }
 }

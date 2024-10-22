@@ -74,9 +74,12 @@ class MealOptions extends StatelessWidget {
                     )
                   ])),
                   SliverList.builder(
-                    itemCount: provider.recomendations.length,
+                    itemCount: provider.list.length,
                     itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        provider.getChosenOptionData(int.parse(provider.list[index].idMeal), context);
+                        context.go("/recipe");
+                      },
                       child: Container(
                           margin: EdgeInsets.fromLTRB(
                               CustomMethods.mediaWidth(context, 28),
@@ -108,8 +111,7 @@ class MealOptions extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(15),
                                       image: DecorationImage(
                                           image: NetworkImage(provider
-                                              .listOfPopularMeals[index]
-                                              .strMealThumb),
+                                              .list[index].strMealThumb),
                                           fit: BoxFit.cover)),
                                 ),
                               ),
@@ -134,8 +136,7 @@ class MealOptions extends StatelessWidget {
                                           children: [
                                             Text(
                                               overflow: TextOverflow.ellipsis,
-                                              provider.listOfPopularMeals[index]
-                                                  .strMeal,
+                                              provider.list[index].strMeal,
                                               style: TextStyle(
                                                   color: ColorsClass.black,
                                                   fontSize:

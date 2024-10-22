@@ -4,7 +4,6 @@ import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
-import 'package:magic_hands/main.dart';
 import 'package:magic_hands/providers/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -96,6 +95,8 @@ class CategoriesScreen extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
+                                  provider.getAllOptions(provider
+                                      .mealCategories[index].strCategory);
                                   context.push("/meal_options");
                                 },
                                 child: Container(
