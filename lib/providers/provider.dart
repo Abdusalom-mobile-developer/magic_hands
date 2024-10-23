@@ -257,7 +257,7 @@ class ProvidersClass extends ChangeNotifier {
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
 
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < 21; i++) {
           if (body["meals"][0]["strIngredient$i"] == "" ||
               body["meals"][0]["strIngredient$i"] == null) {
             break;
