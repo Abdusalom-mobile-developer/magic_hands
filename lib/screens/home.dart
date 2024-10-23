@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_hands/config/colors.dart';
@@ -121,6 +123,7 @@ class HomeScreen extends StatelessWidget {
                       onTap: () {
                         provider.getAllOptions(provider
                                       .mealCategories[index].strCategory);
+                                    provider.changeCurrentCategory(provider.mealCategories[index].strCategory);
                         context.go("/meal_options");
                       },
                       child: Container(
@@ -167,8 +170,13 @@ class HomeScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: provider.recomendations.length,
                           itemBuilder: (context, index) => GestureDetector(
-                            onTap: () {
-                              context.push("/recipe");
+                            onTap: () async{
+                             provider.listOfRowMakerIngredients.clear();
+                              await provider.getChosenOptionData(
+                                  int.parse(provider.recomendations[index].idMeal),
+                                  context);
+                              provider.makeListOfIngredients(context);
+                              context.go("/recipe");
                             },
                             child: Container(
                                 margin:
@@ -246,8 +254,13 @@ class HomeScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: provider.listOfPopularMeals.length,
                           itemBuilder: (context, index) => GestureDetector(
-                            onTap: () {
-                              context.push("/recipe");
+                            onTap: () async{
+                              provider.listOfRowMakerIngredients.clear();
+                              await provider.getChosenOptionData(
+                                  int.parse(provider.listOfPopularMeals[index].idMeal),
+                                  context);
+                              provider.makeListOfIngredients(context);
+                              context.go("/recipe");
                             },
                             child: Container(
                                 margin: index !=

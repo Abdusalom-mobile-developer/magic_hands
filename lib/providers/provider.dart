@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 import 'package:magic_hands/config/widgets.dart';
 import 'package:magic_hands/moduls/categories_info.dart';
+import 'package:magic_hands/moduls/food_info.dart';
 import 'package:magic_hands/moduls/meal_categories.dart';
 import 'package:magic_hands/moduls/popular_meals.dart';
 import 'package:magic_hands/moduls/recomendation_food_info.dart';
@@ -175,7 +176,27 @@ class ProvidersClass extends ChangeNotifier {
         "52841"),
   ];
 
-  List<RecomendationFoodInfo> list = [];
+  Future<String> getArea(int optionId) async {
+    final response = await get(Uri.parse(
+        "https://www.themealdb.com/api/json/v1/1/lookup.php?i=$optionId"));
+
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      return body["meals"][0]["strArea"];
+    }
+
+    return "Unknown";
+  }
+
+  List<FoodInfo> list = [];
+
+  String _currentCategory = "";
+  String get currentCategory => _currentCategory;
+
+  void changeCurrentCategory(String value) {
+    _currentCategory = value;
+    notifyListeners();
+  }
 
   Future<void> getAllOptions(String category) async {
     list.clear();
@@ -188,8 +209,8 @@ class ProvidersClass extends ChangeNotifier {
         body.addAll(jsonDecode(response.body)["meals"]);
 
         for (var elem in body) {
-          list.add(RecomendationFoodInfo(
-              elem["strMeal"], elem["strMealThumb"], elem["idMeal"]));
+          list.add(FoodInfo(elem["strMeal"], elem["strMealThumb"],
+              elem["idMeal"], await getArea(int.parse(elem["idMeal"])), 9));
         }
         notifyListeners();
       }
@@ -206,35 +227,45 @@ class ProvidersClass extends ChangeNotifier {
     "strMealThumb":
         "https://i.pinimg.com/474x/6a/f1/ec/6af1ec6645410a41d5339508a83b86f9.jpg",
     "strYoutube": "",
-    "listOfIngredients": <Widget>[],
   };
+
+  // ignore: prefer_final_fields
+  List<String> _listOfIngredients = [];
+  // ignore: prefer_final_fields
+  List<String> _listOfIngredientsMeasure = [];
+  List<Widget> listOfRowMakerIngredients = [];
+
+  void makeListOfIngredients(BuildContext context) {
+    try {
+      for (int i = 0; i < _listOfIngredients.length; i++) {
+        listOfRowMakerIngredients.add(CustomWidgets.ingredientsRowMaker(
+            context, _listOfIngredients[i], _listOfIngredientsMeasure[i]));
+      }
+      notifyListeners();
+      LogService.d(listOfRowMakerIngredients.toString());
+    } catch (e) {
+      LogService.w(e.toString());
+    }
+  }
 
   Future<void> getChosenOptionData(int optionId, BuildContext context) async {
     final response = await get(Uri.parse(
         "https://www.themealdb.com/api/json/v1/1/lookup.php?i=$optionId"));
+    _listOfIngredients.clear();
+    _listOfIngredientsMeasure.clear();
     try {
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
-        List<Widget> listOfRowMakerIngredients = [];
-        List<String> listOfIngredients = [];
-        List<String> listOfIngredientsMeasure = [];
+
         for (int i = 1; i < 9; i++) {
           if (body["meals"][0]["strIngredient$i"] == "" ||
               body["meals"][0]["strIngredient$i"] == null) {
             break;
           } else {
-            listOfIngredients.add(body["meals"][0]["strIngredient$i"]);
-            listOfIngredientsMeasure.add(body["meals"][0]["strMeasure$i"]);
+            _listOfIngredients.add(body["meals"][0]["strIngredient$i"]);
+            _listOfIngredientsMeasure.add(body["meals"][0]["strMeasure$i"]);
           }
         }
-
-        // for (int i = 0; i < listOfIngredients.length; i++) {
-        //   listOfRowMakerIngredients.add(CustomWidgets.ingredientsRowMaker(
-        //       // ignore: use_build_context_synchronously
-        //       context,
-        //       listOfIngredients[i],
-        //       listOfIngredientsMeasure[i]));
-        // }
 
         chosenOption["strMeal"] = body["meals"][0]["strMeal"];
         chosenOption["strCategory"] = body["meals"][0]["strCategory"];
@@ -244,11 +275,11 @@ class ProvidersClass extends ChangeNotifier {
             .replaceAll("\r\n", "");
         chosenOption["strMealThumb"] = body["meals"][0]["strMealThumb"];
         chosenOption["strYoutube"] = body["meals"][0]["strYoutube"];
-        chosenOption["listOfIngredients"] = listOfRowMakerIngredients;
+
         notifyListeners();
       }
     } catch (e) {
-      LogService.e(e.toString()+" damn fuck it");
+      LogService.e(e.toString());
       LogService.e(response.body);
     }
   }

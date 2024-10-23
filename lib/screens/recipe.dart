@@ -140,7 +140,7 @@ class RecipeScreen extends StatelessWidget {
                             ),
                             CustomWidgets.height(context, 90),
                             Column(
-                              children: provider.chosenOption["listOfIngredients"],
+                              children: provider.listOfRowMakerIngredients,
                             ),
                             CustomWidgets.height(context, 40),
                             Text(

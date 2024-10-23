@@ -97,6 +97,7 @@ class CategoriesScreen extends StatelessWidget {
                                 onTap: () {
                                   provider.getAllOptions(provider
                                       .mealCategories[index].strCategory);
+                                      provider.changeCurrentCategory(provider.mealCategories[index].strCategory);
                                   context.push("/meal_options");
                                 },
                                 child: Container(
