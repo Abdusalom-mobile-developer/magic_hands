@@ -35,8 +35,7 @@ class RecipeScreen extends StatelessWidget {
                       Icons.restaurant_menu_rounded,
                     ),
                     label: "Recipe"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.settings), label: "Settings"),
+              
               ]),
             resizeToAvoidBottomInset: false,
             backgroundColor: ColorsClass.bgColor,

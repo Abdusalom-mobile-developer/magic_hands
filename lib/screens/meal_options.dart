@@ -39,8 +39,7 @@ class MealOptions extends StatelessWidget {
                         Icons.restaurant_menu_rounded,
                       ),
                       label: "Recipe"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.settings), label: "Settings"),
+                 
                 ]),
             backgroundColor: ColorsClass.bgColor,
             body: provider.list.isEmpty

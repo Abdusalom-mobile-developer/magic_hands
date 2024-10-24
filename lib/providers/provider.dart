@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:magic_hands/config/widgets.dart';
 import 'package:magic_hands/moduls/categories_info.dart';
 import 'package:magic_hands/moduls/food_info.dart';
@@ -267,7 +269,7 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
-  void makeRecipeClickable(){
+  void makeRecipeClickable() {
     _recipeClickable = true;
     notifyListeners();
   }
@@ -303,7 +305,7 @@ class ProvidersClass extends ChangeNotifier {
     "strYoutube": "https://www.youtube.com/watch?v=mTvlmY4vCug",
   };
 
-  void clearList(){
+  void clearList() {
     list.clear();
     notifyListeners();
   }
@@ -365,5 +367,26 @@ class ProvidersClass extends ChangeNotifier {
       LogService.e(e.toString());
       LogService.e(response.body);
     }
+  }
+
+  bool _isConnected = true;
+  bool get isConnected => _isConnected;
+  late StreamSubscription subscription;
+  void interetConnectionListener() {
+    subscription = InternetConnection().onStatusChange.listen(
+      (event) {
+        switch (event) {
+          case InternetStatus.connected:
+            _isConnected = true;
+            notifyListeners();
+            break;
+          case InternetStatus.disconnected:
+            _isConnected = false;
+            notifyListeners();
+            break;
+          default:
+        }
+      },
+    );
   }
 }

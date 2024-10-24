@@ -30,4 +30,5 @@ class ImgPath {
   static const String bowl2 = "assets/images/bowl2.png";
   static const String placeholder2 = "assets/images/placeholder3.png";
   static const String ramen = "assets/images/ramen.png";
+  static const String connection = "assets/images/connection.png";
 }

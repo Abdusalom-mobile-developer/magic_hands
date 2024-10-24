@@ -38,8 +38,7 @@ class CategoriesScreen extends StatelessWidget {
                       Icons.restaurant_menu_rounded,
                     ),
                     label: "Recipe"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.settings), label: "Settings"),
+               
               ]),
           body: SafeArea(
               child: Container(
