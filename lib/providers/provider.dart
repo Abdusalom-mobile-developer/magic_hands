@@ -29,12 +29,19 @@ class ProvidersClass extends ChangeNotifier {
   }
 
   void changeCurrentIndex(int index, BuildContext context) {
-    _bottomNavigationBarIndex = index;
-    if (_bottomNavigationBarIndex == 0) {
-      context.go("/home");
-    } else if (_bottomNavigationBarIndex == 1) {
-      context.go("/categories");
+    List<String> routes = ["/home", "/categories", "/meal_options", "/recipe"];
+    if (index == 2 && !_optionsClickable) {
+      _bottomNavigationBarIndex = _bottomNavigationBarIndex;
+    } else if (index == 3 && !_recipeClickable) {
+      _bottomNavigationBarIndex = _bottomNavigationBarIndex;
+    } else {
+      _bottomNavigationBarIndex = index;
     }
+
+    // if(index == 1){
+    //   clearList();
+    // }
+    context.go(routes[_bottomNavigationBarIndex]);
     notifyListeners();
   }
 
@@ -188,13 +195,38 @@ class ProvidersClass extends ChangeNotifier {
     return "Unknown";
   }
 
+  Future<int> getNumOfIngre(int optionId) async {
+    final response = await get(Uri.parse(
+        "https://www.themealdb.com/api/json/v1/1/lookup.php?i=$optionId"));
+
+    int count = 0;
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+
+      for (int i = 1; i < 21; i++) {
+        if (body["meals"][0]["strIngredient$i"] == "" ||
+            body["meals"][0]["strIngredient$i"] == null) {
+          break;
+        } else {
+          count++;
+        }
+      }
+    }
+
+    return count;
+  }
+
   List<FoodInfo> list = [];
 
-  String _currentCategory = "";
+  String _currentCategory = "Chicken";
+  String _currentCategoryImg =
+      "https://www.themealdb.com/images/category/chicken.png";
   String get currentCategory => _currentCategory;
+  String get currentCategoryImg => _currentCategoryImg;
 
-  void changeCurrentCategory(String value) {
+  void changeCurrentCategory(String value, String imgPath) {
     _currentCategory = value;
+    _currentCategoryImg = imgPath;
     notifyListeners();
   }
 
@@ -209,25 +241,36 @@ class ProvidersClass extends ChangeNotifier {
         body.addAll(jsonDecode(response.body)["meals"]);
 
         for (var elem in body) {
-          list.add(FoodInfo(elem["strMeal"], elem["strMealThumb"],
-              elem["idMeal"], await getArea(int.parse(elem["idMeal"])), 9));
+          list.add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
         }
-        notifyListeners();
+        // notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
     }
   }
 
-  Map<String, dynamic> chosenOption = {
-    "strMeal": "",
-    "strCategory": "",
-    "strArea": "",
-    "strInstructions": "",
-    "strMealThumb":
-        "https://i.pinimg.com/474x/6a/f1/ec/6af1ec6645410a41d5339508a83b86f9.jpg",
-    "strYoutube": "",
-  };
+  bool _optionsClickable = false;
+  bool get optionClickable => _optionsClickable;
+  // ignore: unused_field
+  bool _recipeClickable = false;
+  bool get recipeClickable => _optionsClickable;
+
+  void makeOptionsClickable() {
+    _optionsClickable = true;
+    notifyListeners();
+  }
+
+  void makeRecipeClickable(){
+    _recipeClickable = true;
+    notifyListeners();
+  }
 
   // ignore: prefer_final_fields
   List<String> _listOfIngredients = [];
@@ -248,6 +291,23 @@ class ProvidersClass extends ChangeNotifier {
     }
   }
 
+  Map<String, dynamic> chosenOption = {
+    "strMeal": "Turkey Meatloaf",
+    "strCategory": "Miscellaneous",
+    "strArea": "Turkey",
+    "strInstructions":
+        "Heat oven to 180C/160C fan/gas 4. Heat the oil in a large frying pan and cook the onion for 8-10 mins until softened. Add the garlic, Worcestershire sauce and 2 tsp tomato purée, and stir until combined. Set aside to cool.\r\n\r\nPut the turkey mince, egg, breadcrumbs and cooled onion mix in a large bowl and season well. Mix everything to combine, then shape into a rectangular loaf and place in a large roasting tin. Spread 2 tbsp barbecue sauce over the meatloaf and bake for 30 mins.\r\n\r\nMeanwhile, drain 1 can of beans only, then pour both cans into a large bowl. Add the remaining barbecue sauce and tomato purée. Season and set aside.\r\n\r\nWhen the meatloaf has had its initial cooking time, scatter the beans around the outside and bake for 15 mins more until the meatloaf is cooked through and the beans are piping hot. Scatter over the parsley and serve the meatloaf in slices."
+            .replaceAll("\r\n", ""),
+    "strMealThumb":
+        "https://www.themealdb.com/images/media/meals/ypuxtw1511297463.jpg",
+    "strYoutube": "https://www.youtube.com/watch?v=mTvlmY4vCug",
+  };
+
+  void clearList(){
+    list.clear();
+    notifyListeners();
+  }
+
   Future<void> getChosenOptionData(int optionId, BuildContext context) async {
     final response = await get(Uri.parse(
         "https://www.themealdb.com/api/json/v1/1/lookup.php?i=$optionId"));
@@ -262,8 +322,31 @@ class ProvidersClass extends ChangeNotifier {
               body["meals"][0]["strIngredient$i"] == null) {
             break;
           } else {
-            _listOfIngredients.add(body["meals"][0]["strIngredient$i"]);
-            _listOfIngredientsMeasure.add(body["meals"][0]["strMeasure$i"]);
+            List<String> textList =
+                body["meals"][0]["strIngredient$i"].toString().split(" ");
+            if (textList.length > 2) {
+              textList.removeRange(2, textList.length);
+              if (textList.join().length > 10) {
+                textList.removeLast();
+                _listOfIngredients.add(textList.join(" "));
+              }
+              _listOfIngredients.add(textList.join(" "));
+            } else {
+              _listOfIngredients.add(textList.join(" "));
+            }
+
+            List<String> measureList =
+                body["meals"][0]["strMeasure$i"].toString().split(" ");
+            if (measureList.length > 2) {
+              measureList.removeRange(2, measureList.length);
+              if (measureList.join().length > 10) {
+                measureList.removeLast();
+                _listOfIngredientsMeasure.add(measureList.join(" "));
+              }
+              _listOfIngredientsMeasure.add(measureList.join(" "));
+            } else {
+              _listOfIngredientsMeasure.add(measureList.join(" "));
+            }
           }
         }
 

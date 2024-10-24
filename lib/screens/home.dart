@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
     return Consumer<ProvidersClass>(
       builder: (context, provider, child) => Scaffold(
           bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               currentIndex: provider.bottomNavigationBarIndex,
               backgroundColor: ColorsClass.bgColor,
               onTap: (value) {
@@ -30,6 +31,16 @@ class HomeScreen extends StatelessWidget {
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.fastfood_rounded), label: "Categories"),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.menu_book_rounded,
+                    ),
+                    label: "Options"),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.restaurant_menu_rounded,
+                    ),
+                    label: "Recipe"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.settings), label: "Settings"),
               ]),
@@ -121,10 +132,14 @@ class HomeScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
-                        provider.getAllOptions(provider
-                                      .mealCategories[index].strCategory);
-                                    provider.changeCurrentCategory(provider.mealCategories[index].strCategory);
-                        context.go("/meal_options");
+                        provider.clearList();
+                        provider.getAllOptions(
+                            provider.mealCategories[index].strCategory);
+                        provider.changeCurrentCategory(
+                            provider.mealCategories[index].strCategory,
+                            provider.mealCategories[index].strCategoryThumb);
+                        provider.makeOptionsClickable();
+                        provider.changeCurrentIndex(2, context);
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -170,12 +185,14 @@ class HomeScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: provider.recomendations.length,
                           itemBuilder: (context, index) => GestureDetector(
-                            onTap: () async{
-                             provider.listOfRowMakerIngredients.clear();
+                            onTap: () async {
+                              provider.listOfRowMakerIngredients.clear();
                               await provider.getChosenOptionData(
-                                  int.parse(provider.recomendations[index].idMeal),
+                                  int.parse(
+                                      provider.recomendations[index].idMeal),
                                   context);
                               provider.makeListOfIngredients(context);
+                              provider.makeRecipeClickable();
                               context.go("/recipe");
                             },
                             child: Container(
@@ -254,10 +271,11 @@ class HomeScreen extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           itemCount: provider.listOfPopularMeals.length,
                           itemBuilder: (context, index) => GestureDetector(
-                            onTap: () async{
+                            onTap: () async {
                               provider.listOfRowMakerIngredients.clear();
                               await provider.getChosenOptionData(
-                                  int.parse(provider.listOfPopularMeals[index].idMeal),
+                                  int.parse(provider
+                                      .listOfPopularMeals[index].idMeal),
                                   context);
                               provider.makeListOfIngredients(context);
                               context.go("/recipe");

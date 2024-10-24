@@ -16,6 +16,7 @@ class MealOptions extends StatelessWidget {
     return Consumer<ProvidersClass>(
         builder: (context, provider, child) => Scaffold(
             bottomNavigationBar: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
                 currentIndex: provider.bottomNavigationBarIndex,
                 backgroundColor: ColorsClass.bgColor,
                 onTap: (value) {
@@ -28,6 +29,16 @@ class MealOptions extends StatelessWidget {
                       icon: Icon(Icons.home), label: "Home"),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.fastfood_rounded), label: "Categories"),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.menu_book_rounded,
+                      ),
+                      label: "Options"),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.restaurant_menu_rounded,
+                      ),
+                      label: "Recipe"),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.settings), label: "Settings"),
                 ]),
@@ -106,13 +117,16 @@ class MealOptions extends StatelessWidget {
                           itemBuilder: (context, index) => GestureDetector(
                             onTap: () async {
                               provider.listOfRowMakerIngredients.clear();
+                              
                               await provider.getChosenOptionData(
                                   int.parse(provider.list[index].idMeal),
                                   context);
                               provider.makeListOfIngredients(context);
-                              context.go("/recipe");
+                              provider.makeRecipeClickable();
+                              provider.changeCurrentIndex(3, context);
                             },
                             child: Container(
+                              
                                 margin: EdgeInsets.fromLTRB(
                                     CustomMethods.mediaWidth(context, 28),
                                     0,
@@ -140,6 +154,7 @@ class MealOptions extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(15),
                                             image: DecorationImage(
+                                              
                                                 image: NetworkImage(provider
                                                     .list[index].strMealThumb),
                                                 fit: BoxFit.cover)),

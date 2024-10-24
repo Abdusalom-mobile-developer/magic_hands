@@ -16,6 +16,7 @@ class CategoriesScreen extends StatelessWidget {
       builder: (context, provider, child) => Scaffold(
           backgroundColor: ColorsClass.bgColor,
           bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               currentIndex: provider.bottomNavigationBarIndex,
               backgroundColor: ColorsClass.bgColor,
               onTap: (value) {
@@ -27,6 +28,16 @@ class CategoriesScreen extends StatelessWidget {
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.fastfood_rounded), label: "Categories"),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.menu_book_rounded,
+                    ),
+                    label: "Options"),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.restaurant_menu_rounded,
+                    ),
+                    label: "Recipe"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.settings), label: "Settings"),
               ]),
@@ -95,10 +106,16 @@ class CategoriesScreen extends StatelessWidget {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
+                                  provider.clearList();
                                   provider.getAllOptions(provider
                                       .mealCategories[index].strCategory);
-                                      provider.changeCurrentCategory(provider.mealCategories[index].strCategory);
-                                  context.push("/meal_options");
+                                  provider.changeCurrentCategory(
+                                      provider
+                                          .mealCategories[index].strCategory,
+                                      provider.mealCategories[index]
+                                          .strCategoryThumb);
+                                  provider.makeOptionsClickable();
+                                  provider.changeCurrentIndex(2, context);
                                 },
                                 child: Container(
                                   width: double.infinity,

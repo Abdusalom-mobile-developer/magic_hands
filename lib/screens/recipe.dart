@@ -12,22 +12,32 @@ class RecipeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ProvidersClass>(
         builder: (context, provider, child) => Scaffold(
-            bottomNavigationBar: BottomNavigationBar(
-                currentIndex: provider.bottomNavigationBarIndex,
-                backgroundColor: ColorsClass.bgColor,
-                onTap: (value) {
-                  provider.changeCurrentIndex(value, context);
-                },
-                unselectedItemColor: ColorsClass.black,
-                selectedItemColor: ColorsClass.darkRed,
-                items: const [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.home), label: "Home"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.fastfood_rounded), label: "Categories"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.settings), label: "Settings"),
-                ]),
+           bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: provider.bottomNavigationBarIndex,
+              backgroundColor: ColorsClass.bgColor,
+              onTap: (value) {
+                provider.changeCurrentIndex(value, context);
+              },
+              unselectedItemColor: ColorsClass.black,
+              selectedItemColor: ColorsClass.darkRed,
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.fastfood_rounded), label: "Categories"),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.menu_book_rounded,
+                    ),
+                    label: "Options"),
+                BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.restaurant_menu_rounded,
+                    ),
+                    label: "Recipe"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.settings), label: "Settings"),
+              ]),
             resizeToAvoidBottomInset: false,
             backgroundColor: ColorsClass.bgColor,
             body: Container(
@@ -43,8 +53,10 @@ class RecipeScreen extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(
-                                    provider.chosenOption["strMealThumb"].toString().trim()),
+                                image: NetworkImage(provider
+                                    .chosenOption["strMealThumb"]
+                                    .toString()
+                                    .trim()),
                                 fit: BoxFit.cover)),
                       )),
                   Transform.translate(
@@ -83,7 +95,9 @@ class RecipeScreen extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          provider.chosenOption["strMeal"].toString().trim(),
+                                          provider.chosenOption["strMeal"]
+                                              .toString()
+                                              .trim(),
                                           style: TextStyle(
                                               color: ColorsClass.black,
                                               fontSize:
@@ -97,7 +111,9 @@ class RecipeScreen extends StatelessWidget {
                                               -CustomMethods.mediaWidth(
                                                   context, 70)),
                                           child: Text(
-                                            provider.chosenOption["strArea"].toString().trim(),
+                                            provider.chosenOption["strArea"]
+                                                .toString()
+                                                .trim(),
                                             style: TextStyle(
                                                 color: ColorsClass.black
                                                     .withOpacity(0.5),
@@ -122,8 +138,8 @@ class RecipeScreen extends StatelessWidget {
                                         CustomMethods.mediaHeight(context, 15),
                                     width: CustomMethods.mediaWidth(context, 7),
                                     child: Image(
-                                      image: NetworkImage(provider
-                                          .mealCategories[0].strCategoryThumb),
+                                      image: NetworkImage(
+                                          provider.currentCategoryImg),
                                     ),
                                   )
                                 ],
@@ -153,7 +169,9 @@ class RecipeScreen extends StatelessWidget {
                             ),
                             CustomWidgets.height(context, 100),
                             Text(
-                             provider.chosenOption["strInstructions"].toString().trim(),
+                              provider.chosenOption["strInstructions"]
+                                  .toString()
+                                  .trim(),
                               style: TextStyle(
                                   color: ColorsClass.black.withOpacity(0.5),
                                   fontSize:

@@ -93,7 +93,8 @@ class CustomWidgets {
     );
   }
 
-  static ingredientsRowMaker(BuildContext context, String strIngre, String measure) {
+  static ingredientsRowMaker(
+      BuildContext context, String strIngre, String measure) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -110,8 +111,8 @@ class CustomWidgets {
               ),
             ),
             CustomWidgets.width(context, 62),
-            Text(strIngre
-              ,
+            Text(
+              strIngre,
               style: TextStyle(
                   color: ColorsClass.black.withOpacity(0.5),
                   fontSize: CustomMethods.mediaWidth(context, 21),
