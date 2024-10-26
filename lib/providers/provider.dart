@@ -232,6 +232,8 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   Future<void> getAllOptions(String category) async {
     list.clear();
     try {

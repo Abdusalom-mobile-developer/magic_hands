@@ -14,7 +14,31 @@ class MealOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ProvidersClass>(
-        builder: (context, provider, child) => Scaffold(
+        builder: (context, provider, child) => !provider.isConnected
+          ? Scaffold(
+              backgroundColor: ColorsClass.bgColor,
+              body: SizedBox(
+                width: double.infinity,
+                child: Transform.translate(
+                  offset: Offset(0, -CustomMethods.mediaWidth(context, 11)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.wifi_off_rounded,
+                          color: ColorsClass.darkRed,
+                          size: CustomMethods.mediaWidth(context, 1.7)),
+                      Text(
+                        "No Connection !",
+                        style: TextStyle(
+                            color: ColorsClass.black,
+                            fontSize: CustomMethods.mediaWidth(context, 11),
+                            fontFamily: "Fredoka"),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ) : Scaffold(
             bottomNavigationBar: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
                 currentIndex: provider.bottomNavigationBarIndex,
@@ -116,7 +140,6 @@ class MealOptions extends StatelessWidget {
                           itemBuilder: (context, index) => GestureDetector(
                             onTap: () async {
                               provider.listOfRowMakerIngredients.clear();
-                              
                               await provider.getChosenOptionData(
                                   int.parse(provider.list[index].idMeal),
                                   context);

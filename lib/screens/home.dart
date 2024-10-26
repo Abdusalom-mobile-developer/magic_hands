@@ -17,6 +17,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<ProvidersClass>(context).interetConnectionListener();
+
     return Consumer<ProvidersClass>(
       builder: (context, provider, child) => !provider.isConnected
           ? Scaffold(
@@ -28,14 +30,7 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Transform.translate(
-                      //   offset: Offset(CustomMethods.mediaWidth(context, 5), 0),
-                      //   child: Image(
-                      //     image: const AssetImage(ImgPath.connection),
-                      //     height: CustomMethods.mediaWidth(context, 1.2),
-                      //   ),
-                      // ),
-                      Icon(Icons.wifi_off,
+                      Icon(Icons.wifi_off_rounded,
                           color: ColorsClass.darkRed,
                           size: CustomMethods.mediaWidth(context, 1.7)),
                       Text(
