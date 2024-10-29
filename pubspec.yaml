@@ -22,6 +22,7 @@ dependencies:
   internet_connection_checker_plus: ^2.5.2
   flutter_bloc: ^8.1.6
   bloc: ^8.1.4
+  back_button_interceptor: ^7.0.3
 
 dev_dependencies:
   flutter_test:

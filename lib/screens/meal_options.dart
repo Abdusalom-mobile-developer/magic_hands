@@ -1,16 +1,36 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
 import 'package:magic_hands/providers/provider.dart';
 import 'package:provider/provider.dart';
 
-class MealOptions extends StatelessWidget {
+class MealOptions extends StatefulWidget {
   const MealOptions({super.key});
 
+  @override
+  State<MealOptions> createState() => _MealOptionsState();
+}
+
+class _MealOptionsState extends State<MealOptions> {
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {   
+    super.dispose();
+    BackButtonInterceptor.remove(myInterceptor);
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    return true;
+  }
   @override
   Widget build(BuildContext context) {
     return Consumer<ProvidersClass>(

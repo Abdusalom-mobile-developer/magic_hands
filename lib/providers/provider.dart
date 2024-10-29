@@ -40,9 +40,6 @@ class ProvidersClass extends ChangeNotifier {
       _bottomNavigationBarIndex = index;
     }
 
-    // if(index == 1){
-    //   clearList();
-    // }
     context.go(routes[_bottomNavigationBarIndex]);
     notifyListeners();
   }

@@ -54,7 +54,6 @@ class MyApp extends StatelessWidget {
           },
         );
       },
-      
     ),
     GoRoute(
       name: "onboarding",
@@ -91,21 +90,42 @@ class MyApp extends StatelessWidget {
       },
     ),
     GoRoute(
-      path: "/home",
-      pageBuilder: (context, state) {
-        return CustomTransitionPage(
-          key: state.pageKey,
-          transitionDuration: const Duration(milliseconds: 300),
-          child: const HomeScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(
-              opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
-              child: child,
-            );
-          },
-        );
-      },
-    ),
+        path: "/home",
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(milliseconds: 300),
+            child: const HomeScreen(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInCirc).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+        routes: [
+          GoRoute(
+            path: "categories",
+            pageBuilder: (context, state) {
+              return CustomTransitionPage(
+                key: state.pageKey,
+                transitionDuration: const Duration(milliseconds: 300),
+                child: const CategoriesScreen(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity:
+                        CurveTween(curve: Curves.easeInCirc).animate(animation),
+                    child: child,
+                  );
+                },
+              );
+            },
+          ),
+        ]),
     GoRoute(
       path: "/categories",
       pageBuilder: (context, state) {
