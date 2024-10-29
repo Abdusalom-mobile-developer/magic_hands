@@ -41,22 +41,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _showExitConfirmation() {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Exit Confirmation'),
-          content: Text('Do you really want to quit?'),
+          backgroundColor: ColorsClass.bgColor,
+          title: const Text(
+            'Exit Confirmation',
+            style: TextStyle(fontFamily: "Fredoka"),
+          ),
+          content: Text('Do you really want to quit?',
+              style: TextStyle(
+                  fontFamily: "Fredoka",
+                  color: ColorsClass.black.withOpacity(0.6),
+                  fontSize: CustomMethods.mediaWidth(context, 23))),
           actions: <Widget>[
             TextButton(
-              child: Text('No'),
+              child:  Text('No', style: TextStyle(fontFamily: "Fredoka", fontSize: CustomMethods.mediaWidth(context, 25),)),
               onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(
-              child: Text('Yes'),
+              child:  Text('Yes', style: TextStyle(fontFamily: "Fredoka", fontSize: CustomMethods.mediaWidth(context, 25))),
               onPressed: () {
-                Navigator.of(context).pop(); // Close dialog
-                // Close the app or navigate to the previous screen
-                // You can use SystemNavigator.pop() to exit the app
+                Navigator.of(context).pop();
                 SystemNavigator.pop();
               },
             ),
