@@ -57,11 +57,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: CustomMethods.mediaWidth(context, 23))),
           actions: <Widget>[
             TextButton(
-              child:  Text('No', style: TextStyle(fontFamily: "Fredoka", fontSize: CustomMethods.mediaWidth(context, 25),)),
+              child: Text('No',
+                  style: TextStyle(
+                    fontFamily: "Fredoka",
+                    fontSize: CustomMethods.mediaWidth(context, 25),
+                  )),
               onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(
-              child:  Text('Yes', style: TextStyle(fontFamily: "Fredoka", fontSize: CustomMethods.mediaWidth(context, 25))),
+              child: Text('Yes',
+                  style: TextStyle(
+                      fontFamily: "Fredoka",
+                      fontSize: CustomMethods.mediaWidth(context, 25))),
               onPressed: () {
                 Navigator.of(context).pop();
                 SystemNavigator.pop();
@@ -221,14 +228,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => GestureDetector(
                           onTap: () {
-                            provider.clearList();
-                            provider.getAllOptions(
-                                provider.mealCategories[index].strCategory);
+                            // provider.clearList();
+                            // provider.getAllOptions(
+                            //     provider.mealCategories[index].strCategory);
                             provider.changeCurrentCategory(
                                 provider.mealCategories[index].strCategory,
                                 provider
                                     .mealCategories[index].strCategoryThumb);
                             provider.makeOptionsClickable();
+                            provider.changeCurrentIndexOfCategory(index);
                             provider.changeCurrentIndex(2, context);
                           },
                           child: Container(
@@ -284,6 +292,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context);
                                   provider.makeListOfIngredients(context);
                                   provider.makeRecipeClickable();
+                                   provider.changeCurrentCategory(
+                                provider.listOfRecomendationsImgPaths[index]
+                                    ["catName"]!,
+                                provider.listOfRecomendationsImgPaths[index]
+                                    ["imgPath"]!);
                                   context.go("/recipe");
                                 },
                                 child: Container(
@@ -377,6 +390,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                           .listOfPopularMeals[index].idMeal),
                                       context);
                                   provider.makeListOfIngredients(context);
+                                   provider.changeCurrentCategory(
+                                provider.listOfPopularImgPaths[index]
+                                    ["catName"]!,
+                                provider.listOfPopularImgPaths[index]
+                                    ["imgPath"]!);
                                   context.go("/recipe");
                                 },
                                 child: Container(

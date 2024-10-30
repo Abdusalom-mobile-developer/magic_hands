@@ -1,5 +1,6 @@
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
@@ -17,16 +18,11 @@ class _RecipeScreenState extends State<RecipeScreen> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add(myInterceptor);
+    BackButtonInterceptor.add((stopDefaultButtonEvent, info) => myInterceptor(stopDefaultButtonEvent, info, context));
   }
 
-  @override
-  void dispose() {   
-    super.dispose();
-    BackButtonInterceptor.remove(myInterceptor);
-  }
-
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info, BuildContext context) {
+    Provider.of<ProvidersClass>(context, listen: false).changeCurrentIndex(2, context);
     return true;
   }
   @override

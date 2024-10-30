@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
@@ -98,6 +97,84 @@ class ProvidersClass extends ChangeNotifier {
         "https://www.themealdb.com/images/category/vegetarian.png"),
   ];
 
+  List<Map<String, String>> listOfRecomendationsImgPaths = [
+    {
+      "imgPath": "https://www.themealdb.com/images/category/miscellaneous.png",
+      "catName": "Miscellaneous"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/pasta.png",
+      "catName": "Pasta"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/seafood.png",
+      "catName": "Seafood"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/chicken.png",
+      "catName": "Chicken"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/dessert.png",
+      "catName": "Dessert"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/starter.png",
+      "catName": "Starter"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/vegan.png",
+      "catName": "Vegan"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/vegetarian.png",
+      "catName": "Vegetarian"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/pork.png",
+      "catName": "Pork"
+    },
+  ];
+
+  List<Map<String, String>> listOfPopularImgPaths = [
+    {
+      "imgPath": "https://www.themealdb.com/images/category/beef.png",
+      "catName": "Beef"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/chicken.png",
+      "catName": "Chicken"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/dessert.png",
+      "catName": "Dessert"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/lamb.png",
+      "catName": "Lamb"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/miscellaneous.png",
+      "catName": "Miscellaneous"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/pasta.png",
+      "catName": "Pasta"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/pork.png",
+      "catName": "Pork"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/side.png",
+      "catName": "Side"
+    },
+    {
+      "imgPath": "https://www.themealdb.com/images/category/starter.png",
+      "catName": "Starter"
+    },
+  ];
+
   List<RecomendationFoodInfo> recomendations = [
     RecomendationFoodInfo(
         "French Omelette",
@@ -107,10 +184,6 @@ class ProvidersClass extends ChangeNotifier {
         "Lasagne",
         "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg",
         "52844"),
-    RecomendationFoodInfo(
-        "Burek",
-        "https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg",
-        "53051"),
     RecomendationFoodInfo(
         "Nasi lemak",
         "https://www.themealdb.com/images/media/meals/wai9bw1619788844.jpg",
@@ -169,10 +242,6 @@ class ProvidersClass extends ChangeNotifier {
         "https://www.themealdb.com/images/media/meals/md8w601593348504.jpg",
         "53018"),
     PopularMeals(
-        "Tuna and Egg Briks",
-        "https://www.themealdb.com/images/media/meals/2dsltq1560461468.jpg",
-        "52975"),
-    PopularMeals(
         "Split Pea Soup",
         "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
         "52925"),
@@ -215,8 +284,6 @@ class ProvidersClass extends ChangeNotifier {
     return count;
   }
 
-  List<FoodInfo> list = [];
-
   String _currentCategory = "Chicken";
   String _currentCategoryImg =
       "https://www.themealdb.com/images/category/chicken.png";
@@ -229,20 +296,40 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<List<FoodInfo>> list = [[], [], [], [], [], [], [], [], [], [], [], []];
 
+  int currentIndex = 0;
+  void changeCurrentIndexOfCategory(int newIndex) {
+    currentIndex = newIndex;
+    notifyListeners();
+  }
 
-  Future<void> getAllOptions(String category) async {
-    list.clear();
+  void getAllOptions() {
+    getBeefOptions();
+    getChickenOptions();
+    getDessertOptions();
+    getLambOptions();
+    getMiscellaneousOptions();
+    getPastaOptions();
+    getPorkOptions();
+    getSeafoodOptions();
+    getSideOptions();
+    getStarterOptions();
+    getVeganOptions();
+    getVegetarianOptions();
+  }
+
+  Future<void> getBeefOptions() async {
     try {
       final response = await get(Uri.parse(
-          "https://www.themealdb.com/api/json/v1/1/filter.php?c=$category"));
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef"));
 
       List<dynamic> body = [];
       if (response.statusCode == 200) {
         body.addAll(jsonDecode(response.body)["meals"]);
 
         for (var elem in body) {
-          list.add(FoodInfo(
+          list.first.add(FoodInfo(
               elem["strMeal"],
               elem["strMealThumb"],
               elem["idMeal"],
@@ -250,7 +337,270 @@ class ProvidersClass extends ChangeNotifier {
               await getNumOfIngre(int.parse(elem["idMeal"]))));
           notifyListeners();
         }
-        // notifyListeners();
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getChickenOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[1].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getDessertOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[2].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getLambOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Lamb"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[3].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getMiscellaneousOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Miscellaneous"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[4].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getPastaOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Pasta"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[5].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getPorkOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Pork"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[6].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getSeafoodOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[7].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getSideOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Side"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[8].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getStarterOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Starter"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[9].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getVeganOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegan"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[10].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
+      }
+    } catch (e) {
+      LogService.e("$e.");
+    }
+  }
+
+  Future<void> getVegetarianOptions() async {
+    try {
+      final response = await get(Uri.parse(
+          "https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian"));
+
+      List<dynamic> body = [];
+      if (response.statusCode == 200) {
+        body.addAll(jsonDecode(response.body)["meals"]);
+
+        for (var elem in body) {
+          list[11].add(FoodInfo(
+              elem["strMeal"],
+              elem["strMealThumb"],
+              elem["idMeal"],
+              await getArea(int.parse(elem["idMeal"])),
+              await getNumOfIngre(int.parse(elem["idMeal"]))));
+          notifyListeners();
+        }
       }
     } catch (e) {
       LogService.e("$e.");
@@ -281,12 +631,11 @@ class ProvidersClass extends ChangeNotifier {
 
   void makeListOfIngredients(BuildContext context) {
     try {
-      for (int i = 0; i < _listOfIngredients.length; i++) {
+      for (int i = 0; i < _listOfIngredients.length - 1; i++) {
         listOfRowMakerIngredients.add(CustomWidgets.ingredientsRowMaker(
             context, _listOfIngredients[i], _listOfIngredientsMeasure[i]));
       }
       notifyListeners();
-      LogService.d(listOfRowMakerIngredients.toString());
     } catch (e) {
       LogService.w(e.toString());
     }
@@ -304,10 +653,10 @@ class ProvidersClass extends ChangeNotifier {
     "strYoutube": "https://www.youtube.com/watch?v=mTvlmY4vCug",
   };
 
-  void clearList() {
-    list.clear();
-    notifyListeners();
-  }
+  // void clearList() {
+  //   list.clear();
+  //   notifyListeners();
+  // }
 
   Future<void> getChosenOptionData(int optionId, BuildContext context) async {
     final response = await get(Uri.parse(
