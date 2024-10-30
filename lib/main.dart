@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:magic_hands/providers/provider.dart';
@@ -15,6 +16,8 @@ void main() async {
   await Hive.initFlutter();  
   // ignore: unused_local_variable
   var box = await Hive.openBox("myBox");
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(MyApp());
 }
 
