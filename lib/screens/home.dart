@@ -211,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     CustomMethods.mediaWidth(context, 22)),
                           ),
                         )),
-                    CustomWidgets.height(context, 20),
+                    CustomWidgets.height(context, 40),
                     // Categories Part
                     Text(
                       "Categories",
@@ -263,211 +263,196 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    CustomWidgets.height(context, 25),
+                    CustomWidgets.height(context, 40),
                     //Bottom Recomendations Part
-                    Expanded(
-                        child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Recomendations",
-                            style: TextStyle(
-                                color: ColorsClass.black,
-                                fontSize: CustomMethods.mediaWidth(context, 18),
-                                fontFamily: "Fredoka"),
-                          ),
-                          CustomWidgets.height(context, 50),
-                          SizedBox(
-                            height: CustomMethods.mediaHeight(context, 5.3),
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: provider.recomendations.length,
-                              itemBuilder: (context, index) => GestureDetector(
-                                onTap: () async {
-                                  provider.listOfRowMakerIngredients.clear();
-                                  await provider.getChosenOptionData(
-                                      int.parse(provider
-                                          .recomendations[index].idMeal),
-                                      context);
-                                  provider.makeListOfIngredients(context);
-                                  provider.makeRecipeClickable();
-                                   provider.changeCurrentCategory(
-                                provider.listOfRecomendationsImgPaths[index]
-                                    ["catName"]!,
-                                provider.listOfRecomendationsImgPaths[index]
-                                    ["imgPath"]!);
-                                  context.go("/recipe");
-                                },
-                                child: Container(
-                                    margin: index !=
-                                            provider.recomendations.length - 1
-                                        ? const EdgeInsets.only(right: 18)
-                                        : const EdgeInsets.only(right: 0),
-                                    height:
-                                        CustomMethods.mediaHeight(context, 5.3),
-                                    width: CustomMethods.mediaWidth(context, 2),
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(provider
-                                              .recomendations[index]
-                                              .strMealThumb),
-                                          fit: BoxFit.cover,
-                                        ),
-                                        color: ColorsClass.darkRed
-                                            .withOpacity(0.16),
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                              begin: Alignment.bottomCenter,
-                                              colors: [
-                                                ColorsClass.black
-                                                    .withOpacity(0.13),
-                                                ColorsClass.black
-                                                    .withOpacity(0.13)
-                                              ]),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                            alignment: Alignment.center,
-                                            height: CustomMethods.mediaHeight(
-                                                context, 20),
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                                color: ColorsClass.darkRed
-                                                    .withOpacity(0.67),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        bottomLeft:
-                                                            Radius.circular(10),
-                                                        bottomRight:
-                                                            Radius.circular(
-                                                                10))),
-                                            child: Text(
-                                              provider.recomendations[index]
-                                                  .strMeal,
-                                              style: TextStyle(
-                                                  color: ColorsClass.bgColor,
-                                                  fontSize:
-                                                      CustomMethods.mediaWidth(
-                                                          context, 24),
-                                                  fontFamily: "Fredoka"),
-                                            ),
-                                          )
-                                        ],
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Recomendations",
+                          style: TextStyle(
+                              color: ColorsClass.black,
+                              fontSize: CustomMethods.mediaWidth(context, 18),
+                              fontFamily: "Fredoka"),
+                        ),
+                        CustomWidgets.height(context, 50),
+                        SizedBox(
+                          height: CustomMethods.mediaHeight(context, 5.3),
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: provider.recomendations.length,
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () async {
+                                provider.listOfRowMakerIngredients.clear();
+                                await provider.getChosenOptionData(
+                                    int.parse(
+                                        provider.recomendations[index].idMeal),
+                                    context);
+                                provider.makeListOfIngredients(context);
+                                provider.makeRecipeClickable();
+                                provider.changeCurrentCategory(
+                                    provider.listOfRecomendationsImgPaths[index]
+                                        ["catName"]!,
+                                    provider.listOfRecomendationsImgPaths[index]
+                                        ["imgPath"]!);
+                                context.go("/recipe");
+                              },
+                              child: Container(
+                                  margin: index !=
+                                          provider.recomendations.length - 1
+                                      ? const EdgeInsets.only(right: 18)
+                                      : const EdgeInsets.only(right: 0),
+                                  height:
+                                      CustomMethods.mediaHeight(context, 5.3),
+                                  width: CustomMethods.mediaWidth(context, 2),
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(provider
+                                            .recomendations[index]
+                                            .strMealThumb),
+                                        fit: BoxFit.cover,
                                       ),
-                                    )),
-                              ),
-                            ),
-                          ),
-                          CustomWidgets.height(context, 25),
-                          Text(
-                            "Popular",
-                            style: TextStyle(
-                                color: ColorsClass.black,
-                                fontSize: CustomMethods.mediaWidth(context, 18),
-                                fontFamily: "Fredoka"),
-                          ),
-                          CustomWidgets.height(context, 50),
-                          SizedBox(
-                            height: CustomMethods.mediaHeight(context, 4),
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: provider.listOfPopularMeals.length,
-                              itemBuilder: (context, index) => GestureDetector(
-                                onTap: () async {
-                                  provider.listOfRowMakerIngredients.clear();
-                                  await provider.getChosenOptionData(
-                                      int.parse(provider
-                                          .listOfPopularMeals[index].idMeal),
-                                      context);
-                                  provider.makeListOfIngredients(context);
-                                   provider.changeCurrentCategory(
-                                provider.listOfPopularImgPaths[index]
-                                    ["catName"]!,
-                                provider.listOfPopularImgPaths[index]
-                                    ["imgPath"]!);
-                                  context.go("/recipe");
-                                },
-                                child: Container(
-                                    margin: index !=
-                                            provider.listOfPopularMeals.length -
-                                                1
-                                        ? const EdgeInsets.only(right: 22)
-                                        : const EdgeInsets.only(right: 0),
-                                    height:
-                                        CustomMethods.mediaHeight(context, 4),
-                                    width:
-                                        CustomMethods.mediaWidth(context, 1.4),
+                                      color:
+                                          ColorsClass.darkRed.withOpacity(0.16),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: double.infinity,
                                     decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(provider
-                                              .listOfPopularMeals[index]
-                                              .strMealThumb),
-                                          fit: BoxFit.cover,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    child: Container(
-                                      decoration: BoxDecoration(
                                         gradient: LinearGradient(
                                             begin: Alignment.bottomCenter,
                                             colors: [
                                               ColorsClass.black
-                                                  .withOpacity(0.15),
+                                                  .withOpacity(0.13),
                                               ColorsClass.black
-                                                  .withOpacity(0.15)
+                                                  .withOpacity(0.13)
                                             ]),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                            alignment: Alignment.center,
-                                            height: CustomMethods.mediaHeight(
-                                                context, 20),
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                                color: ColorsClass.darkRed
-                                                    .withOpacity(0.67),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        bottomLeft:
-                                                            Radius.circular(10),
-                                                        bottomRight:
-                                                            Radius.circular(
-                                                                10))),
-                                            child: Text(
-                                              provider.listOfPopularMeals[index]
-                                                  .strMeal,
-                                              style: TextStyle(
-                                                  color: ColorsClass.bgColor,
-                                                  fontSize:
-                                                      CustomMethods.mediaWidth(
-                                                          context, 24),
-                                                  fontFamily: "Fredoka"),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                              ),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: CustomMethods.mediaHeight(
+                                              context, 20),
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                              color: ColorsClass.darkRed
+                                                  .withOpacity(0.67),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(10),
+                                                      bottomRight:
+                                                          Radius.circular(10))),
+                                          child: Text(
+                                            provider
+                                                .recomendations[index].strMeal,
+                                            style: TextStyle(
+                                                color: ColorsClass.bgColor,
+                                                fontSize:
+                                                    CustomMethods.mediaWidth(
+                                                        context, 24),
+                                                fontFamily: "Fredoka"),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )),
                             ),
                           ),
-                          CustomWidgets.height(context, 18),
-                        ],
-                      ),
-                    ))
+                        ),
+                        CustomWidgets.height(context, 40),
+                        Text(
+                          "Popular",
+                          style: TextStyle(
+                              color: ColorsClass.black,
+                              fontSize: CustomMethods.mediaWidth(context, 18),
+                              fontFamily: "Fredoka"),
+                        ),
+                        CustomWidgets.height(context, 50),
+                        SizedBox(
+                          height: CustomMethods.mediaHeight(context, 4.5),
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: provider.listOfPopularMeals.length,
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () async {
+                                provider.listOfRowMakerIngredients.clear();
+                                await provider.getChosenOptionData(
+                                    int.parse(provider
+                                        .listOfPopularMeals[index].idMeal),
+                                    context);
+                                provider.makeListOfIngredients(context);
+                                provider.changeCurrentCategory(
+                                    provider.listOfPopularImgPaths[index]
+                                        ["catName"]!,
+                                    provider.listOfPopularImgPaths[index]
+                                        ["imgPath"]!);
+                                context.go("/recipe");
+                              },
+                              child: Container(
+                                  margin: index !=
+                                          provider.listOfPopularMeals.length - 1
+                                      ? const EdgeInsets.only(right: 22)
+                                      : const EdgeInsets.only(right: 0),
+                                  height: CustomMethods.mediaHeight(context, 4),
+                                  width: CustomMethods.mediaWidth(context, 1.4),
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(provider
+                                            .listOfPopularMeals[index]
+                                            .strMealThumb),
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          begin: Alignment.bottomCenter,
+                                          colors: [
+                                            ColorsClass.black.withOpacity(0.15),
+                                            ColorsClass.black.withOpacity(0.15)
+                                          ]),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: CustomMethods.mediaHeight(
+                                              context, 20),
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                              color: ColorsClass.darkRed
+                                                  .withOpacity(0.67),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(10),
+                                                      bottomRight:
+                                                          Radius.circular(10))),
+                                          child: Text(
+                                            provider.listOfPopularMeals[index]
+                                                .strMeal,
+                                            style: TextStyle(
+                                                color: ColorsClass.bgColor,
+                                                fontSize:
+                                                    CustomMethods.mediaWidth(
+                                                        context, 24),
+                                                fontFamily: "Fredoka"),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ))),
