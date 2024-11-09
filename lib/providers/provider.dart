@@ -5,7 +5,18 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:magic_hands/config/widgets.dart';
-import 'package:magic_hands/moduls/categories_info.dart';
+import 'package:magic_hands/database/beef_data.dart';
+import 'package:magic_hands/database/chicken_data.dart';
+import 'package:magic_hands/database/dessert_data.dart';
+import 'package:magic_hands/database/lamb_data.dart';
+import 'package:magic_hands/database/miscellaneous_data.dart';
+import 'package:magic_hands/database/pasta_data.dart';
+import 'package:magic_hands/database/pork_data.dart';
+import 'package:magic_hands/database/seafood_data.dart';
+import 'package:magic_hands/database/side_data.dart';
+import 'package:magic_hands/database/starter_data.dart';
+import 'package:magic_hands/database/vagan_data.dart';
+import 'package:magic_hands/database/vegetarian_data.dart';
 import 'package:magic_hands/moduls/food_info.dart';
 import 'package:magic_hands/moduls/meal_categories.dart';
 import 'package:magic_hands/moduls/popular_meals.dart';
@@ -42,33 +53,6 @@ class ProvidersClass extends ChangeNotifier {
     context.go(routes[_bottomNavigationBarIndex]);
     notifyListeners();
   }
-
-  List<CategoriesInfo> categoriesInfo = [
-    CategoriesInfo("British", "assets/images/flags/ic_britain.jpg"),
-    CategoriesInfo("American", "assets/images/flags/ic_america.jpg"),
-    CategoriesInfo("French", "assets/images/flags/ic_france.jpg"),
-    CategoriesInfo("Canadian", "assets/images/flags/ic_canada.jpg"),
-    CategoriesInfo("Jamaican", "assets/images/flags/ic_jamaica.jpg"),
-    CategoriesInfo("Chinese", "assets/images/flags/ic_china.jpg"),
-    CategoriesInfo("Dutch", "assets/images/flags/ic_netherlands.jpg"),
-    CategoriesInfo("Egyptian", "assets/images/flags/ic_egypt.jpg"),
-    CategoriesInfo("Greek", "assets/images/flags/ic_greece.jpg"),
-    CategoriesInfo("Indian", "assets/images/flags/ic_india.jpg"),
-    CategoriesInfo("Irish", "assets/images/flags/ic_ireland.jpg"),
-    CategoriesInfo("Italian", "assets/images/flags/ic_italy.jpg"),
-    CategoriesInfo("Japanese", "assets/images/flags/ic_japan.jpg"),
-    CategoriesInfo("Malaysian", "assets/images/flags/ic_malaysia.jpg"),
-    CategoriesInfo("Mexican", "assets/images/flags/ic_mexico.jpg"),
-    CategoriesInfo("Moroccan", "assets/images/flags/ic_morocco.jpg"),
-    CategoriesInfo("Croatian", "assets/images/flags/ic_croatia.jpg"),
-    CategoriesInfo("Portuguese", "assets/images/flags/ic_portugal.jpg"),
-    CategoriesInfo("Russian", "assets/images/flags/ic_russia.jpg"),
-    CategoriesInfo("Spanish", "assets/images/flags/ic_spain.jpg"),
-    CategoriesInfo("Thai", "assets/images/flags/ic_thailand.jpg"),
-    CategoriesInfo("Tunisian", "assets/images/flags/ic_tunisia.jpg"),
-    CategoriesInfo("Polish", "assets/images/flags/ic_poland.jpg"),
-    CategoriesInfo("Filipino", "assets/images/flags/ic_philippines.jpg"),
-  ];
 
   List<MealCategories> mealCategories = [
     MealCategories(
@@ -296,7 +280,20 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<List<FoodInfo>> list = [[], [], [], [], [], [], [], [], [], [], [], []];
+  List<List<FoodInfo>> list = [
+    BeefData.foodList,
+    ChickenData.foodList,
+    DessertData.foodList,
+    LambData.foodList,
+    MiscellaneousData.foodList,
+    PastaData.foodList,
+    PorkData.forList,
+    SeafoodData.foodList,
+    SideData.foodList,
+    StarterData.foodList,
+    VeganClass.foodList,
+    VegetarianData.foodList
+  ];
 
   int currentIndex = 0;
   void changeCurrentIndexOfCategory(int newIndex) {
@@ -304,20 +301,20 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getAllOptions() {
-    getBeefOptions();
-    getChickenOptions();
-    getDessertOptions();
-    getLambOptions();
-    getMiscellaneousOptions();
-    getPastaOptions();
-    getPorkOptions();
-    getSeafoodOptions();
-    getSideOptions();
-    getStarterOptions();
-    getVeganOptions();
-    getVegetarianOptions();
-  }
+  // void getAllOptions() {
+  //   getBeefOptions();
+  //   getChickenOptions();
+  //   getDessertOptions();
+  //   getLambOptions();
+  //   getMiscellaneousOptions();
+  //   getPastaOptions();
+  //   getPorkOptions();
+  //   getSeafoodOptions();
+  //   getSideOptions();
+  //   getStarterOptions();
+  //   getVeganOptions();
+  //   getVegetarianOptions();
+  // }
 
   Future<void> getBeefOptions() async {
     try {
@@ -335,8 +332,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -359,8 +356,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -383,8 +380,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -407,8 +404,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -431,8 +428,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -455,8 +452,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -479,8 +476,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -503,8 +500,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -527,8 +524,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -551,8 +548,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -575,8 +572,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");
@@ -599,8 +596,8 @@ class ProvidersClass extends ChangeNotifier {
               elem["idMeal"],
               await getArea(int.parse(elem["idMeal"])),
               await getNumOfIngre(int.parse(elem["idMeal"]))));
-          notifyListeners();
         }
+        notifyListeners();
       }
     } catch (e) {
       LogService.e("$e.");

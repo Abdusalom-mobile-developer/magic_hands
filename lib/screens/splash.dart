@@ -40,14 +40,15 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    Provider.of<ProvidersClass>(context).getAllOptions();
-  }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+    
+  // }
 
   @override
   Widget build(BuildContext context) {
+    // Provider.of<ProvidersClass>(context).getAllOptions();
     return Scaffold(
         backgroundColor: ColorsClass.bgColor,
         body: Stack(
