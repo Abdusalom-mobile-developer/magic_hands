@@ -36,7 +36,6 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           context.go("/onboarding");
         }
-        // context.go("/onboarding");
       },
     );
   }
@@ -44,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Provider.of<ProvidersClass>(context, listen: false).getAllOptions();
+    Provider.of<ProvidersClass>(context).getAllOptions();
   }
 
   @override

@@ -83,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Provider.of<ProvidersClass>(context).interetConnectionListener();
-
     return Consumer<ProvidersClass>(
       builder: (context, provider, child) => !provider.isConnected
           ? Scaffold(
@@ -295,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ["catName"]!,
                                     provider.listOfRecomendationsImgPaths[index]
                                         ["imgPath"]!);
-                                context.go("/recipe");
+                                provider.changeCurrentIndex(3, context);
                               },
                               child: Container(
                                   margin: index !=
@@ -390,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ["catName"]!,
                                     provider.listOfPopularImgPaths[index]
                                         ["imgPath"]!);
-                                context.go("/recipe");
+                                provider.changeCurrentIndex(3, context);
                               },
                               child: Container(
                                   margin: index !=

@@ -19,7 +19,8 @@ class _MealOptionsState extends State<MealOptions> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add((stopDefaultButtonEvent, info) => myInterceptor(stopDefaultButtonEvent, info, context));
+    BackButtonInterceptor.add((stopDefaultButtonEvent, info) =>
+        myInterceptor(stopDefaultButtonEvent, info, context));
   }
 
   // @override
@@ -28,8 +29,10 @@ class _MealOptionsState extends State<MealOptions> {
   //   BackButtonInterceptor.remove(myInterceptor);
   // }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info, BuildContext context) {
-    Provider.of<ProvidersClass>(context, listen: false).changeCurrentIndex(1, context);
+  bool myInterceptor(
+      bool stopDefaultButtonEvent, RouteInfo info, BuildContext context) {
+    Provider.of<ProvidersClass>(context, listen: false)
+        .changeCurrentIndex(1, context);
     return true;
   }
 
@@ -160,12 +163,15 @@ class _MealOptionsState extends State<MealOptions> {
                               )
                             ])),
                             SliverList.builder(
-                              itemCount: provider.list[provider.currentIndex].length,
+                              itemCount:
+                                  provider.list[provider.currentIndex].length,
                               itemBuilder: (context, index) => GestureDetector(
                                 onTap: () async {
                                   provider.listOfRowMakerIngredients.clear();
                                   await provider.getChosenOptionData(
-                                      int.parse(provider.list[provider.currentIndex][index].idMeal),
+                                      int.parse(provider
+                                          .list[provider.currentIndex][index]
+                                          .idMeal),
                                       context);
                                   provider.makeListOfIngredients(context);
                                   provider.makeRecipeClickable();
@@ -202,7 +208,9 @@ class _MealOptionsState extends State<MealOptions> {
                                                     BorderRadius.circular(15),
                                                 image: DecorationImage(
                                                     image: NetworkImage(provider
-                                                        .list[provider.currentIndex][index]
+                                                        .list[provider
+                                                                .currentIndex]
+                                                            [index]
                                                         .strMealThumb),
                                                     fit: BoxFit.cover)),
                                           ),
@@ -235,7 +243,10 @@ class _MealOptionsState extends State<MealOptions> {
                                                       Text(
                                                         overflow: TextOverflow
                                                             .ellipsis,
-                                                        provider.list[provider.currentIndex][index]
+                                                        provider
+                                                            .list[provider
+                                                                    .currentIndex]
+                                                                [index]
                                                             .strMeal,
                                                         style: TextStyle(
                                                             color: ColorsClass
@@ -256,7 +267,10 @@ class _MealOptionsState extends State<MealOptions> {
                                                                     context,
                                                                     78)),
                                                         child: Text(
-                                                          provider.list[provider.currentIndex][index]
+                                                          provider
+                                                              .list[provider
+                                                                      .currentIndex]
+                                                                  [index]
                                                               .strArea,
                                                           style: TextStyle(
                                                               color: ColorsClass
@@ -276,47 +290,46 @@ class _MealOptionsState extends State<MealOptions> {
                                                   ),
                                                   Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                        MainAxisAlignment.end,
                                                     children: [
-                                                      Text(
-                                                        "Ingredients: ${provider.list[provider.currentIndex][index].numOfIngredients}",
-                                                        style: TextStyle(
-                                                            color: ColorsClass
-                                                                .black
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            fontSize:
-                                                                CustomMethods
+                                                      Container(
+                                                          height: CustomMethods
+                                                              .mediaWidth(
+                                                                  context, 10),
+                                                          width: CustomMethods
+                                                              .mediaWidth(
+                                                                  context, 4),
+                                                          alignment:
+                                                              Alignment.center,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius.circular(
+                                                                      CustomMethods.mediaWidth(
+                                                                          context,
+                                                                          30)),
+                                                              color: ColorsClass
+                                                                  .darkRed),
+                                                          child:
+                                                              Transform.translate(
+                                                            offset: Offset(
+                                                                0,
+                                                                -CustomMethods
                                                                     .mediaWidth(
                                                                         context,
-                                                                        20),
-                                                            fontFamily:
-                                                                "Fredoka"),
-                                                      ),
-                                                      Container(
-                                                        height: CustomMethods
-                                                            .mediaWidth(
-                                                                context, 10),
-                                                        width: CustomMethods
-                                                            .mediaWidth(
-                                                                context, 10),
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                                color: ColorsClass
-                                                                    .darkRed),
-                                                        child: Icon(
-                                                          Icons
-                                                              .arrow_forward_ios_rounded,
-                                                          color: ColorsClass
-                                                              .bgColor,
-                                                          size: CustomMethods
-                                                              .mediaWidth(
-                                                                  context, 20),
-                                                        ),
-                                                      )
+                                                                        180)),
+                                                            child: Text(
+                                                              "More",
+                                                              style: TextStyle(
+                                                                  color: ColorsClass
+                                                                      .bgColor,
+                                                                  fontSize: CustomMethods
+                                                                      .mediaWidth(
+                                                                          context,
+                                                                          20),
+                                                                  fontFamily:
+                                                                      "Fredoka"),
+                                                            ),
+                                                          ))
                                                     ],
                                                   )
                                                 ],
