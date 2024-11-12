@@ -301,21 +301,6 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
-  // void getAllOptions() {
-  //   getBeefOptions();
-  //   getChickenOptions();
-  //   getDessertOptions();
-  //   getLambOptions();
-  //   getMiscellaneousOptions();
-  //   getPastaOptions();
-  //   getPorkOptions();
-  //   getSeafoodOptions();
-  //   getSideOptions();
-  //   getStarterOptions();
-  //   getVeganOptions();
-  //   getVegetarianOptions();
-  // }
-
   Future<void> getBeefOptions() async {
     try {
       final response = await get(Uri.parse(
