@@ -347,10 +347,6 @@ class ProvidersClass extends ChangeNotifier {
     "strYoutube": "https://www.youtube.com/watch?v=mTvlmY4vCug",
   };
 
-  // void clearList() {
-  //   list.clear();
-  //   notifyListeners();
-  // }
 
   Future<void> getChosenOptionData(int optionId, BuildContext context) async {
     final response = await get(Uri.parse(
