@@ -4,6 +4,7 @@ import 'package:magic_hands/config/colors.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
 import 'package:magic_hands/providers/provider.dart';
+import 'package:magic_hands/screens/home.dart';
 import 'package:provider/provider.dart';
 
 class RecipeScreen extends StatefulWidget {
@@ -17,13 +18,17 @@ class _RecipeScreenState extends State<RecipeScreen> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add((stopDefaultButtonEvent, info) => myInterceptor(stopDefaultButtonEvent, info, context));
+    BackButtonInterceptor.add((stopDefaultButtonEvent, info) =>
+        myInterceptor(stopDefaultButtonEvent, info, context));
   }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info, BuildContext context) {
-    Provider.of<ProvidersClass>(context, listen: false).changeCurrentIndex(2, context);
+  bool myInterceptor(
+      bool stopDefaultButtonEvent, RouteInfo info, BuildContext context) {
+    Provider.of<ProvidersClass>(context, listen: false)
+        .changeCurrentIndex(2, context);
     return true;
   }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ProvidersClass>(
@@ -87,149 +92,156 @@ class _RecipeScreenState extends State<RecipeScreen> {
                           bottom: BorderSide(
                               color: ColorsClass.darkRed.withOpacity(0.3),
                               width: 2))),
-                  child: CustomScrollView(
-                    slivers: [
-                      SliverList.list(children: [
-                        SizedBox(
-                            height: CustomMethods.mediaHeight(context, 2.6),
+                  child: ScrollConfiguration(
+                    behavior: NoGlowScrollBehavior(),
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverList.list(children: [
+                          SizedBox(
+                              height: CustomMethods.mediaHeight(context, 2.6),
+                              width: double.infinity,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: NetworkImage(provider
+                                            .chosenOption["strMealThumb"]
+                                            .toString()
+                                            .trim()),
+                                        fit: BoxFit.cover)),
+                              )),
+                          Transform.translate(
+                            offset: Offset(
+                                0, -CustomMethods.mediaWidth(context, 40)),
+                            child: Container(
+                              height: CustomMethods.mediaWidth(context, 40),
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                  color: ColorsClass.bgColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(50),
+                                      topRight: Radius.circular(50))),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 0),
                             width: double.infinity,
                             child: Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: NetworkImage(provider
-                                          .chosenOption["strMealThumb"]
-                                          .toString()
-                                          .trim()),
-                                      fit: BoxFit.cover)),
-                            )),
-                        Transform.translate(
-                          offset:
-                              Offset(0, -CustomMethods.mediaWidth(context, 40)),
-                          child: Container(
-                            height: CustomMethods.mediaWidth(context, 40),
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
                                 color: ColorsClass.bgColor,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(50),
-                                    topRight: Radius.circular(50))),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(vertical: 0),
-                          width: double.infinity,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                              color: ColorsClass.bgColor,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Transform.translate(
-                                  offset: const Offset(0, -5),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              provider.chosenOption["strMeal"]
-                                                  .toString()
-                                                  .trim(),
-                                              style: TextStyle(
-                                                  color: ColorsClass.black,
-                                                  fontSize:
-                                                      CustomMethods.mediaWidth(
-                                                          context, 14),
-                                                  fontFamily: "Fredoka"),
-                                            ),
-                                            Transform.translate(
-                                              offset: Offset(
-                                                  0,
-                                                  -CustomMethods.mediaWidth(
-                                                      context, 70)),
-                                              child: Text(
-                                                provider.chosenOption["strArea"]
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Transform.translate(
+                                    offset: const Offset(0, -5),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                provider.chosenOption["strMeal"]
                                                     .toString()
                                                     .trim(),
                                                 style: TextStyle(
-                                                    color: ColorsClass.black
-                                                        .withOpacity(0.5),
+                                                    color: ColorsClass.black,
                                                     fontSize: CustomMethods
                                                         .mediaWidth(
-                                                            context, 20),
+                                                            context, 14),
                                                     fontFamily: "Fredoka"),
                                               ),
-                                            ),
-                                          ],
+                                              Transform.translate(
+                                                offset: Offset(
+                                                    0,
+                                                    -CustomMethods.mediaWidth(
+                                                        context, 70)),
+                                                child: Text(
+                                                  provider
+                                                      .chosenOption["strArea"]
+                                                      .toString()
+                                                      .trim(),
+                                                  style: TextStyle(
+                                                      color: ColorsClass.black
+                                                          .withOpacity(0.5),
+                                                      fontSize: CustomMethods
+                                                          .mediaWidth(
+                                                              context, 20),
+                                                      fontFamily: "Fredoka"),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.all(
-                                            CustomMethods.mediaWidth(
-                                                context, 130)),
-                                        decoration: BoxDecoration(
-                                            color: ColorsClass.darkRed
-                                                .withOpacity(0.4),
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        height: CustomMethods.mediaHeight(
-                                            context, 15),
-                                        width: CustomMethods.mediaWidth(
-                                            context, 7),
-                                        child: Image(
-                                          image: NetworkImage(
-                                              provider.currentCategoryImg),
-                                        ),
-                                      )
-                                    ],
+                                        Container(
+                                          padding: EdgeInsets.all(
+                                              CustomMethods.mediaWidth(
+                                                  context, 130)),
+                                          decoration: BoxDecoration(
+                                              color: ColorsClass.darkRed
+                                                  .withOpacity(0.4),
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          height: CustomMethods.mediaHeight(
+                                              context, 15),
+                                          width: CustomMethods.mediaWidth(
+                                              context, 7),
+                                          child: Image(
+                                            image: NetworkImage(
+                                                provider.currentCategoryImg),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Ingredients",
-                                  style: TextStyle(
-                                      color: ColorsClass.black,
-                                      fontSize:
-                                          CustomMethods.mediaWidth(context, 18),
-                                      fontFamily: "Fredoka"),
-                                ),
-                                CustomWidgets.height(context, 90),
-                                Column(
-                                  children: provider.listOfRowMakerIngredients,
-                                ),
-                                CustomWidgets.height(context, 40),
-                                Text(
-                                  "Instruction",
-                                  style: TextStyle(
-                                      color: ColorsClass.black,
-                                      fontSize:
-                                          CustomMethods.mediaWidth(context, 18),
-                                      fontFamily: "Fredoka"),
-                                ),
-                                CustomWidgets.height(context, 100),
-                                Text(
-                                  provider.chosenOption["strInstructions"]
-                                      .toString()
-                                      .trim(),
-                                  style: TextStyle(
-                                      color: ColorsClass.black.withOpacity(0.5),
-                                      fontSize:
-                                          CustomMethods.mediaWidth(context, 21),
-                                      fontFamily: "Fredoka"),
-                                ),
-                                CustomWidgets.height(context, 30),
-                              ],
+                                  Text(
+                                    "Ingredients",
+                                    style: TextStyle(
+                                        color: ColorsClass.black,
+                                        fontSize: CustomMethods.mediaWidth(
+                                            context, 18),
+                                        fontFamily: "Fredoka"),
+                                  ),
+                                  CustomWidgets.height(context, 90),
+                                  Column(
+                                    children:
+                                        provider.listOfRowMakerIngredients,
+                                  ),
+                                  CustomWidgets.height(context, 40),
+                                  Text(
+                                    "Instruction",
+                                    style: TextStyle(
+                                        color: ColorsClass.black,
+                                        fontSize: CustomMethods.mediaWidth(
+                                            context, 18),
+                                        fontFamily: "Fredoka"),
+                                  ),
+                                  CustomWidgets.height(context, 100),
+                                  Text(
+                                    provider.chosenOption["strInstructions"]
+                                        .toString()
+                                        .trim(),
+                                    style: TextStyle(
+                                        color:
+                                            ColorsClass.black.withOpacity(0.5),
+                                        fontSize: CustomMethods.mediaWidth(
+                                            context, 21),
+                                        fontFamily: "Fredoka"),
+                                  ),
+                                  CustomWidgets.height(context, 30),
+                                ],
+                              ),
                             ),
-                          ),
-                        )
-                      ])
-                    ],
+                          )
+                        ])
+                      ],
+                    ),
                   ),
                 )));
   }

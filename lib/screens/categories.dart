@@ -5,6 +5,7 @@ import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
 import 'package:magic_hands/providers/provider.dart';
+import 'package:magic_hands/screens/home.dart';
 import 'package:provider/provider.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -134,117 +135,139 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           ),
                           CustomWidgets.height(context, 25),
                           Expanded(
-                              child: GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 1.1 / 1,
-                              crossAxisSpacing:
-                                  CustomMethods.mediaWidth(context, 30),
-                              mainAxisSpacing:
-                                  CustomMethods.mediaWidth(context, 50),
-                            ),
-                            itemCount: provider.mealCategories.length,
-                            itemBuilder: (context, index) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      if (provider.mealCategories[index]
-                                              .strCategory ==
-                                          "Beef") {
-                                        provider
-                                            .changeCurrentIndexOfCategory(0);
-                                      }else if(provider
-                                          .mealCategories[index].strCategory == "Chicken"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(1);
-                                      }else if(provider
-                                          .mealCategories[index].strCategory == "Dessert"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(2);
-                                      }else if(provider
-                                          .mealCategories[index].strCategory == "Lamb"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(3);
-                                      }else if(provider
-                                          .mealCategories[index].strCategory == "Miscellaneous"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(4);
-                                      }else if(provider
-                                          .mealCategories[index].strCategory == "Pasta"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(5);
-                                      }else if(provider
-                                          .mealCategories[index].strCategory == "Pork"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(6);
-                                      }else if(provider
-                                          .mealCategories[index].strCategory == "Seafood"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(7);
-                                      }
-                                      else if(provider
-                                          .mealCategories[index].strCategory == "Side"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(8);
-                                      }else if(provider
-                                          .mealCategories[index].strCategory == "Starter"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(9);
-                                      }else if(provider
-                                          .mealCategories[index].strCategory == "Vegan"){
-                                            provider
-                                            .changeCurrentIndexOfCategory(10);
-                                      }else{
-                                         provider
-                                            .changeCurrentIndexOfCategory(11);
-                                      }
-                                      // provider.getAllOptions(provider
-                                      //     .mealCategories[index].strCategory);
+                              child: ScrollConfiguration(
+                            behavior: NoGlowScrollBehavior(),
+                            child: GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 1.1 / 1,
+                                crossAxisSpacing:
+                                    CustomMethods.mediaWidth(context, 30),
+                                mainAxisSpacing:
+                                    CustomMethods.mediaWidth(context, 50),
+                              ),
+                              itemCount: provider.mealCategories.length,
+                              itemBuilder: (context, index) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        if (provider.mealCategories[index]
+                                                .strCategory ==
+                                            "Beef") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(0);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Chicken") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(1);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Dessert") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(2);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Lamb") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(3);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Miscellaneous") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(4);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Pasta") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(5);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Pork") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(6);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Seafood") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(7);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Side") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(8);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Starter") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(9);
+                                        } else if (provider
+                                                .mealCategories[index]
+                                                .strCategory ==
+                                            "Vegan") {
+                                          provider
+                                              .changeCurrentIndexOfCategory(10);
+                                        } else {
+                                          provider
+                                              .changeCurrentIndexOfCategory(11);
+                                        }
+                                        // provider.getAllOptions(provider
+                                        //     .mealCategories[index].strCategory);
 
-                                      provider.changeCurrentCategory(
-                                          provider.mealCategories[index]
-                                              .strCategory,
-                                          provider.mealCategories[index]
-                                              .strCategoryThumb);
-                                      provider.makeOptionsClickable();
-                                      provider.changeCurrentIndex(2, context);
-                                    },
-                                    child: Container(
-                                      width: double.infinity,
-                                      padding: const EdgeInsets.all(9),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: ColorsClass.darkRed
-                                              .withOpacity(0.18)),
-                                      child: FadeInImage(
-                                        placeholderFit: BoxFit.scaleDown,
-                                        placeholder: const AssetImage(
-                                            ImgPath.placeholder2),
-                                        image: NetworkImage(provider
-                                            .mealCategories[index]
-                                            .strCategoryThumb),
-                                        fit: BoxFit.cover,
-                                        fadeInDuration:
-                                            const Duration(milliseconds: 2),
-                                        fadeInCurve: Curves.easeInCirc,
+                                        provider.changeCurrentCategory(
+                                            provider.mealCategories[index]
+                                                .strCategory,
+                                            provider.mealCategories[index]
+                                                .strCategoryThumb);
+                                        provider.makeOptionsClickable();
+                                        provider.changeCurrentIndex(2, context);
+                                      },
+                                      child: Container(
+                                        width: double.infinity,
+                                        padding: const EdgeInsets.all(9),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: ColorsClass.darkRed
+                                                .withOpacity(0.18)),
+                                        child: FadeInImage(
+                                          placeholderFit: BoxFit.scaleDown,
+                                          placeholder: const AssetImage(
+                                              ImgPath.placeholder2),
+                                          image: NetworkImage(provider
+                                              .mealCategories[index]
+                                              .strCategoryThumb),
+                                          fit: BoxFit.cover,
+                                          fadeInDuration:
+                                              const Duration(milliseconds: 2),
+                                          fadeInCurve: Curves.easeInCirc,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Text(
-                                  provider.mealCategories[index].strCategory,
-                                  style: TextStyle(
-                                      color: ColorsClass.black,
-                                      fontSize:
-                                          CustomMethods.mediaWidth(context, 20),
-                                      fontFamily: "Fredoka"),
-                                ),
-                                CustomWidgets.height(context, 70),
-                              ],
+                                  Text(
+                                    provider.mealCategories[index].strCategory,
+                                    style: TextStyle(
+                                        color: ColorsClass.black,
+                                        fontSize: CustomMethods.mediaWidth(
+                                            context, 20),
+                                        fontFamily: "Fredoka"),
+                                  ),
+                                  CustomWidgets.height(context, 70),
+                                ],
+                              ),
                             ),
                           )),
                         ],
