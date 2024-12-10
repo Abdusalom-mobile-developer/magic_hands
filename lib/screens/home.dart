@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       barrierDismissible: false,
       context: context,
       builder: (context) {
-        return AlertDialog(
+        return AlertDialog.adaptive(
           backgroundColor: ColorsClass.bgColor,
           title: const Text(
             'Exit Confirmation',
