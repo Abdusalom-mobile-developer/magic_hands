@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:magic_hands/config/colors.dart';
-import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
 import 'package:magic_hands/providers/provider.dart';

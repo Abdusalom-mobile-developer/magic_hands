@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_hands/main.dart';
 import 'package:magic_hands/moduls/categories_info.dart';
 
 class ProvidersClass extends ChangeNotifier {
