@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: ColorsClass.darkRed.withOpacity(0.3),
+                            color: ColorsClass.darkRed.withValues(alpha: 0.3),
                             width: 2))),
                 padding: EdgeInsets.symmetric(
                     horizontal: CustomMethods.mediaWidth(context, 20)),
@@ -164,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Text(
                                 "Hello, ${HiveCrud.read(HiveKeys.username) ?? "unknown"}",
                                 style: TextStyle(
-                                    color: ColorsClass.black.withOpacity(0.5),
+                                    color: ColorsClass.black.withValues(alpha: 0.5),
                                     fontSize:
                                         CustomMethods.mediaWidth(context, 20),
                                     fontFamily: "Fredoka"),
@@ -248,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: CustomMethods.mediaWidth(context, 3.4),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: ColorsClass.darkRed.withOpacity(0.16),
+                                color: ColorsClass.darkRed.withValues(alpha: 0.16),
                               ),
                               child: Text(
                                 provider.mealCategories[index].strCategory,
@@ -314,8 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .strMealThumb),
                                           fit: BoxFit.cover,
                                         ),
-                                        color: ColorsClass.darkRed
-                                            .withOpacity(0.16),
+                                        color: ColorsClass.darkRed.withValues(alpha: 0.16),
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: Container(
@@ -326,9 +325,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               begin: Alignment.bottomCenter,
                                               colors: [
                                                 ColorsClass.black
-                                                    .withOpacity(0.13),
+                                                    .withValues(alpha: 0.13),
                                                 ColorsClass.black
-                                                    .withOpacity(0.13)
+                                                    .withValues(alpha: 0.13)
                                               ]),
                                           borderRadius:
                                               BorderRadius.circular(10)),
@@ -343,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: double.infinity,
                                             decoration: BoxDecoration(
                                                 color: ColorsClass.darkRed
-                                                    .withOpacity(0.67),
+                                                    .withValues(alpha: 0.67),
                                                 borderRadius:
                                                     const BorderRadius.only(
                                                         bottomLeft:
@@ -425,9 +424,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             begin: Alignment.bottomCenter,
                                             colors: [
                                               ColorsClass.black
-                                                  .withOpacity(0.15),
+                                                  .withValues(alpha: 0.15),
                                               ColorsClass.black
-                                                  .withOpacity(0.15)
+                                                  .withValues(alpha: 0.15)
                                             ]),
                                         borderRadius: BorderRadius.circular(15),
                                       ),
@@ -442,7 +441,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: double.infinity,
                                             decoration: BoxDecoration(
                                                 color: ColorsClass.darkRed
-                                                    .withOpacity(0.67),
+                                                    .withValues(alpha: 0.67),
                                                 borderRadius:
                                                     const BorderRadius.only(
                                                         bottomLeft:
