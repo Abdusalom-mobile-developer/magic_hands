@@ -422,8 +422,7 @@ class ProvidersClass extends ChangeNotifier {
             _isConnected = false;
             notifyListeners();
             break;
-          default:
-        }
+          }
       },
     );
   }
