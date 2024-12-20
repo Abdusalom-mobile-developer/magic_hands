@@ -1,0 +1,354 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:flutter/material.dart';
+import 'package:magic_hands/config/colors.dart';
+import 'package:magic_hands/config/methods.dart';
+import 'package:magic_hands/config/widgets.dart';
+import 'package:magic_hands/providers/provider.dart';
+import 'package:magic_hands/screens/home.dart';
+import 'package:provider/provider.dart';
+
+class MealOptions extends StatefulWidget {
+  const MealOptions({super.key});
+
+  @override
+  State<MealOptions> createState() => _MealOptionsState();
+}
+
+class _MealOptionsState extends State<MealOptions> {
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add((stopDefaultButtonEvent, info) =>
+        myInterceptor(stopDefaultButtonEvent, info, context));
+  }
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   BackButtonInterceptor.remove(myInterceptor);
+  // }
+
+  bool myInterceptor(
+      bool stopDefaultButtonEvent, RouteInfo info, BuildContext context) {
+    Provider.of<ProvidersClass>(context, listen: false)
+        .changeCurrentIndex(1, context);
+    return true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<ProvidersClass>(
+        builder: (context, provider, child) => !provider.isConnected
+            ? Scaffold(
+                backgroundColor: ColorsClass.bgColor,
+                body: SizedBox(
+                  width: double.infinity,
+                  child: Transform.translate(
+                    offset: Offset(0, -CustomMethods.mediaWidth(context, 11)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.wifi_off_rounded,
+                            color: ColorsClass.darkRed,
+                            size: CustomMethods.mediaWidth(context, 1.7)),
+                        Text(
+                          "No Connection !",
+                          style: TextStyle(
+                              color: ColorsClass.black,
+                              fontSize: CustomMethods.mediaWidth(context, 11),
+                              fontFamily: "Fredoka"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            : Scaffold(
+                bottomNavigationBar: BottomNavigationBar(
+                    type: BottomNavigationBarType.fixed,
+                    currentIndex: provider.bottomNavigationBarIndex,
+                    backgroundColor: ColorsClass.bgColor,
+                    onTap: (value) {
+                      provider.changeCurrentIndex(value, context);
+                    },
+                    unselectedItemColor: ColorsClass.black,
+                    selectedItemColor: ColorsClass.darkRed,
+                    items: const [
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.home), label: "Home"),
+                      BottomNavigationBarItem(
+                          icon: Icon(Icons.fastfood_rounded),
+                          label: "Categories"),
+                      BottomNavigationBarItem(
+                          icon: Icon(
+                            Icons.menu_book_rounded,
+                          ),
+                          label: "Options"),
+                      BottomNavigationBarItem(
+                          icon: Icon(
+                            Icons.restaurant_menu_rounded,
+                          ),
+                          label: "Recipe"),
+                    ]),
+                backgroundColor: ColorsClass.bgColor,
+                body: provider.list.isEmpty
+                    ? SizedBox(
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const CircularProgressIndicator(
+                              color: ColorsClass.darkRed,
+                            ),
+                            CustomWidgets.height(context, 17),
+                            Text(
+                              textAlign: TextAlign.center,
+                              "Please wait",
+                              style: TextStyle(
+                                  color: ColorsClass.black,
+                                  fontSize:
+                                      CustomMethods.mediaWidth(context, 17),
+                                  fontFamily: "Fredoka"),
+                            ),
+                          ],
+                        ),
+                      )
+                    : SafeArea(
+                        child: Container(
+                        decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: ColorsClass.darkRed.withOpacity(0.3),
+                                    width: 2))),
+                        width: double.infinity,
+                        child: ScrollConfiguration(
+                          behavior: NoGlowScrollBehavior(),
+                          child: CustomScrollView(
+                            slivers: [
+                              SliverList(
+                                  delegate: SliverChildListDelegate([
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: CustomMethods.mediaWidth(
+                                          context, 28)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomWidgets.height(context, 20),
+                                      Text(
+                                        provider.currentCategory,
+                                        style: TextStyle(
+                                            color: ColorsClass.black,
+                                            fontSize: CustomMethods.mediaWidth(
+                                                context, 14),
+                                            fontFamily: "Fredoka"),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            right: CustomMethods.mediaWidth(
+                                                context, 30)),
+                                        child: Text(
+                                          "Select a meal to see the ingredients and cooking instructions.",
+                                          style: TextStyle(
+                                              color: ColorsClass.black
+                                                  .withOpacity(0.5),
+                                              fontSize:
+                                                  CustomMethods.mediaWidth(
+                                                      context, 20),
+                                              fontFamily: "Fredoka"),
+                                        ),
+                                      ),
+                                      CustomWidgets.height(context, 20),
+                                    ],
+                                  ),
+                                )
+                              ])),
+                              SliverList.builder(
+                                itemCount:
+                                    provider.list[provider.currentIndex].length,
+                                itemBuilder: (context, index) =>
+                                    GestureDetector(
+                                  onTap: () async {
+                                    provider.listOfRowMakerIngredients.clear();
+                                    await provider.getChosenOptionData(
+                                        int.parse(provider
+                                            .list[provider.currentIndex][index]
+                                            .idMeal),
+                                        context);
+                                    provider.makeListOfIngredients(context);
+                                    provider.makeRecipeClickable();
+                                    provider.changeCurrentIndex(3, context);
+                                  },
+                                  child: Container(
+                                      margin: EdgeInsets.fromLTRB(
+                                          CustomMethods.mediaWidth(context, 28),
+                                          0,
+                                          CustomMethods.mediaWidth(context, 28),
+                                          CustomMethods.mediaWidth(
+                                              context, 18)),
+                                      height: CustomMethods.mediaHeight(
+                                          context, 5.8),
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                          color: ColorsClass.bgColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: ColorsClass.black
+                                                    .withOpacity(0.1),
+                                                offset: const Offset(0, 5),
+                                                blurRadius: 5)
+                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 3,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(provider
+                                                          .list[provider
+                                                                  .currentIndex]
+                                                              [index]
+                                                          .strMealThumb),
+                                                      fit: BoxFit.cover)),
+                                            ),
+                                          ),
+                                          Expanded(
+                                              flex: 5,
+                                              child: Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                  CustomMethods.mediaWidth(
+                                                      context, 34),
+                                                  CustomMethods.mediaWidth(
+                                                      context, 32),
+                                                  CustomMethods.mediaWidth(
+                                                      context, 55),
+                                                  CustomMethods.mediaWidth(
+                                                      context, 55),
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          provider
+                                                              .list[provider
+                                                                      .currentIndex]
+                                                                  [index]
+                                                              .strMeal,
+                                                          style: TextStyle(
+                                                              color: ColorsClass
+                                                                  .black,
+                                                              fontSize:
+                                                                  CustomMethods
+                                                                      .mediaWidth(
+                                                                          context,
+                                                                          18),
+                                                              fontFamily:
+                                                                  "Fredoka"),
+                                                        ),
+                                                        // Transform.translate(
+                                                        //   offset: Offset(
+                                                        //       0,
+                                                        //       -CustomMethods
+                                                        //           .mediaWidth(
+                                                        //               context,
+                                                        //               78)),
+                                                        //   child: Text(
+                                                        //     provider
+                                                        //         .list[provider
+                                                        //                 .currentIndex]
+                                                        //             [index]
+                                                        //         .strArea,
+                                                        //     style: TextStyle(
+                                                        //         color: ColorsClass
+                                                        //             .black
+                                                        //             .withOpacity(
+                                                        //                 0.5),
+                                                        //         fontSize:
+                                                        //             CustomMethods
+                                                        //                 .mediaWidth(
+                                                        //                     context,
+                                                        //                     20),
+                                                        //         fontFamily:
+                                                        //             "Fredoka"),
+                                                        //   ),
+                                                        // ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        Container(
+                                                            height: CustomMethods
+                                                                .mediaWidth(
+                                                                    context, 10),
+                                                            width: CustomMethods
+                                                                .mediaWidth(
+                                                                    context, 4),
+                                                            alignment: Alignment
+                                                                .center,
+                                                            decoration: BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius.circular(
+                                                                        CustomMethods.mediaWidth(
+                                                                            context,
+                                                                            30)),
+                                                                color: ColorsClass
+                                                                    .darkRed),
+                                                            child:
+                                                                Transform.translate(
+                                                              offset: Offset(
+                                                                  0,
+                                                                  -CustomMethods
+                                                                      .mediaWidth(
+                                                                          context,
+                                                                          180)),
+                                                              child: Text(
+                                                                "More",
+                                                                style: TextStyle(
+                                                                    color: ColorsClass
+                                                                        .bgColor,
+                                                                    fontSize: CustomMethods
+                                                                        .mediaWidth(
+                                                                            context,
+                                                                            20),
+                                                                    fontFamily:
+                                                                        "Fredoka"),
+                                                              ),
+                                                            ))
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ))
+                                        ],
+                                      )),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ))));
+  }
+}

@@ -9,7 +9,9 @@ import 'package:magic_hands/config/img_path.dart';
 import 'package:magic_hands/config/methods.dart';
 import 'package:magic_hands/config/widgets.dart';
 import 'package:magic_hands/moduls/hive_keys.dart';
+import 'package:magic_hands/providers/provider.dart';
 import 'package:magic_hands/services/hive_crud.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String id = "/splash_screen";
@@ -38,8 +40,15 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+    
+  // }
+
   @override
   Widget build(BuildContext context) {
+    // Provider.of<ProvidersClass>(context).getAllOptions();
     return Scaffold(
         backgroundColor: ColorsClass.bgColor,
         body: Stack(

@@ -1,7 +1,7 @@
 name: magic_hands
 description: "A new Flutter project."
 
-version: 1.0.0+1
+version: 1.0.1
 
 environment:
   sdk: ^3.5.2
@@ -17,6 +17,12 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.0.0
+  http: ^1.2.2
+  logger: ^2.4.0
+  internet_connection_checker_plus: ^2.5.2
+  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4
+  back_button_interceptor: ^7.0.3
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +31,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   hive_generator: ^1.1.0
   build_runner: ^2.1.0
+  
 
 flutter:
 

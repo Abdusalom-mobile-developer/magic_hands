@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:magic_hands/providers/provider.dart';
 import 'package:magic_hands/screens/categories.dart';
 import 'package:magic_hands/screens/home.dart';
+import 'package:magic_hands/screens/meal_options.dart';
 import 'package:magic_hands/screens/onboarding.dart';
+import 'package:magic_hands/screens/recipe.dart';
 import 'package:magic_hands/screens/register.dart';
 import 'package:magic_hands/screens/splash.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart'; 
 
 void main() async {
-  await Hive.initFlutter();
+  await Hive.initFlutter();  
   // ignore: unused_local_variable
   var box = await Hive.openBox("myBox");
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(MyApp());
 }
 
@@ -88,21 +93,42 @@ class MyApp extends StatelessWidget {
       },
     ),
     GoRoute(
-      path: "/home",
-      pageBuilder: (context, state) {
-        return CustomTransitionPage(
-          key: state.pageKey,
-          transitionDuration: const Duration(milliseconds: 300),
-          child: const HomeScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(
-              opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
-              child: child,
-            );
-          },
-        );
-      },
-    ),
+        path: "/home",
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(milliseconds: 300),
+            child: const HomeScreen(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity:
+                    CurveTween(curve: Curves.easeInCirc).animate(animation),
+                child: child,
+              );
+            },
+          );
+        },
+        routes: [
+          GoRoute(
+            path: "categories",
+            pageBuilder: (context, state) {
+              return CustomTransitionPage(
+                key: state.pageKey,
+                transitionDuration: const Duration(milliseconds: 300),
+                child: const CategoriesScreen(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity:
+                        CurveTween(curve: Curves.easeInCirc).animate(animation),
+                    child: child,
+                  );
+                },
+              );
+            },
+          ),
+        ]),
     GoRoute(
       path: "/categories",
       pageBuilder: (context, state) {
@@ -113,6 +139,36 @@ class MyApp extends StatelessWidget {
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    ),
+    GoRoute(
+      path: "/recipe",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          transitionDuration: const Duration(milliseconds: 250),
+          child: const RecipeScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
+              child: child,
+            );
+          },
+        );
+      },
+    ),
+    GoRoute(
+      path: "/meal_options",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          transitionDuration: const Duration(milliseconds: 250),
+          child: const MealOptions(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInBack).animate(animation),
               child: child,
             );
           },

@@ -1,0 +1,47 @@
+import 'package:magic_hands/moduls/food_info.dart';
+
+class DessertData {
+  static List<FoodInfo> foodList = [
+    FoodInfo("Apam balik", "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg", "53049", "", 0),
+    FoodInfo("Apple & Blackberry Crumble", "https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg", "52893", "", 0),
+    FoodInfo("Apple Frangipan Tart", "https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg", "52768", "", 0),
+    FoodInfo("Bakewell tart", "https://www.themealdb.com/images/media/meals/wyrqqq1468233628.jpg", "52767", "", 0),
+    FoodInfo("Banana Pancakes", "https://www.themealdb.com/images/media/meals/sywswr1511383814.jpg", "52855", "", 0),
+    FoodInfo("Battenberg Cake", "https://www.themealdb.com/images/media/meals/ywwrsp1511720277.jpg", "52894", "", 0),
+    FoodInfo("BeaverTails", "https://www.themealdb.com/images/media/meals/ryppsv1511815505.jpg", "52928", "", 0),
+    FoodInfo("Blackberry Fool", "https://www.themealdb.com/images/media/meals/rpvptu1511641092.jpg", "52891", "", 0),
+    FoodInfo("Bread and Butter Pudding", "https://www.themealdb.com/images/media/meals/xqwwpy1483908697.jpg", "52792", "", 0),
+    FoodInfo("Budino Di Ricotta", "https://www.themealdb.com/images/media/meals/1549542877.jpg", "52961", "", 0),
+    FoodInfo("Canadian Butter Tarts", "https://www.themealdb.com/images/media/meals/wpputp1511812960.jpg", "52923", "", 0),
+    FoodInfo("Carrot Cake", "https://www.themealdb.com/images/media/meals/vrspxv1511722107.jpg", "52897", "", 0),
+    FoodInfo("Cashew Ghoriba Biscuits", "https://www.themealdb.com/images/media/meals/t3r3ka1560461972.jpg", "52976", "", 0),
+    FoodInfo("Chelsea Buns", "https://www.themealdb.com/images/media/meals/vqpwrv1511723001.jpg", "52898", "", 0),
+    FoodInfo("Chinon Apple Tarts", "https://www.themealdb.com/images/media/meals/qtqwwu1511792650.jpg", "52910", "", 0),
+    FoodInfo("Choc Chip Pecan Pie", "https://www.themealdb.com/images/media/meals/rqvwxt1511384809.jpg", "52856", "", 0),
+    FoodInfo("Chocolate Avocado Mousse", "https://www.themealdb.com/images/media/meals/uttuxy1511382180.jpg", "52853", "", 0),
+    FoodInfo("Chocolate Caramel Crispy", "https://www.themealdb.com/images/media/meals/1550442508.jpg", "52966", "", 0),
+    FoodInfo("Chocolate Gateau", "https://www.themealdb.com/images/media/meals/tqtywx1468317395.jpg", "52776", "", 0),
+    FoodInfo("Chocolate Raspberry Brownies", "https://www.themealdb.com/images/media/meals/yypvst1511386427.jpg", "52860", "", 0),
+    FoodInfo("Chocolate Souffle", "https://www.themealdb.com/images/media/meals/twspvx1511784937.jpg", "52905", "", 0),
+    FoodInfo("Christmas cake", "https://www.themealdb.com/images/media/meals/ldnrm91576791881.jpg", "52990", "", 0),
+    FoodInfo("Christmas Pudding Flapjack", "https://www.themealdb.com/images/media/meals/vvusxs1483907034.jpg", "52788", "", 0),
+    FoodInfo("Christmas Pudding Trifle", "https://www.themealdb.com/images/media/meals/r33cud1576791081.jpg", "52989", "", 0),
+    FoodInfo("Classic Christmas pudding", "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg", "52988", "", 0),
+    FoodInfo("Dundee cake", "https://www.themealdb.com/images/media/meals/wxyvqq1511723401.jpg", "52899", "", 0),
+    FoodInfo("Eccles Cakes", "https://www.themealdb.com/images/media/meals/wtqrqw1511639627.jpg", "52888", "", 0),
+    FoodInfo("Eton Mess", "https://www.themealdb.com/images/media/meals/uuxwvq1483907861.jpg", "52791", "", 0),
+    FoodInfo("Honey Yogurt Cheesecake", "https://www.themealdb.com/images/media/meals/y2irzl1585563479.jpg", "53007", "", 0),
+    FoodInfo("Hot Chocolate Fudge", "https://www.themealdb.com/images/media/meals/xrysxr1483568462.jpg", "52787", "", 0),
+    FoodInfo("Jam Roly-Poly", "https://www.themealdb.com/images/media/meals/ysqupp1511640538.jpg", "52890", "", 0),
+    FoodInfo("Key Lime Pie", "https://www.themealdb.com/images/media/meals/qpqtuu1511386216.jpg", "52859", "", 0),
+    FoodInfo("Krispy Kreme Donut", "https://www.themealdb.com/images/media/meals/4i5cnx1587672171.jpg", "53015", "", 0),
+    FoodInfo("Madeira Cake", "https://www.themealdb.com/images/media/meals/urtqut1511723591.jpg", "52900", "", 0),
+    FoodInfo("Mince Pies", "https://www.themealdb.com/images/media/meals/qe8pf51576795532.jpg", "52991", "", 0),
+    FoodInfo("Nanaimo Bars", "https://www.themealdb.com/images/media/meals/vwuprt1511813703.jpg", "52924", "", 0),
+    FoodInfo("New York cheesecake", "https://www.themealdb.com/images/media/meals/swttys1511385853.jpg", "52858", "", 0),
+    FoodInfo("Pancakes", "https://www.themealdb.com/images/media/meals/rwuyqx1511383174.jpg", "52854", "", 0),
+    FoodInfo("Parkin Cake", "https://www.themealdb.com/images/media/meals/qxuqtt1511724269.jpg", "52902", "", 0),
+    FoodInfo("Peach & Blueberry Grunt", "https://www.themealdb.com/images/media/meals/ssxvup1511387476.jpg", "52911", "", 0)
+];
+
+}
