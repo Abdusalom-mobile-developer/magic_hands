@@ -13,7 +13,7 @@ import 'package:magic_hands/screens/splash.dart';
 import 'package:provider/provider.dart'; 
 
 void main() async {
-  await Hive.initFlutter();  
+  await Hive.initFlutter();
   // ignore: unused_local_variable
   var box = await Hive.openBox("myBox");
   WidgetsFlutterBinding.ensureInitialized();
