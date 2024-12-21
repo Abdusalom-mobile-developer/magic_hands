@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           content: Text('Do you really want to quit?',
               style: TextStyle(
                   fontFamily: "Fredoka",
-                  color: ColorsClass.black.withOpacity(0.6),
+                  color: ColorsClass.black.withValues(alpha: 0.6),
                   fontSize: CustomMethods.mediaWidth(context, 23))),
           actions: <Widget>[
             TextButton(
@@ -151,9 +151,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: CustomScrollView(
                   slivers: [
                     SliverToBoxAdapter(
-                      child: CustomWidgets.height(context, 16),
-                    ),
-                    SliverToBoxAdapter(
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                           vertical: CustomMethods.mediaWidth(context, 17),
@@ -202,7 +199,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     // Top Big Button Part
                     SliverToBoxAdapter(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        padding: EdgeInsets.symmetric(
+                          vertical: CustomMethods.mediaWidth(context, 43),
+                        ),
                         child: Container(
                           height: CustomMethods.mediaWidth(context, 6.8),
                           width: double.infinity,
@@ -226,9 +225,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: CustomWidgets.height(context, 40),
                     ),
                     // Categories Part
                     SliverToBoxAdapter(
