@@ -86,75 +86,83 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         ),
                         label: "Recipe"),
                   ]),
-              body: SafeArea(
-                  child: Container(
+              body: Container(
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: ColorsClass.darkRed.withOpacity(0.3),
+                            color: ColorsClass.darkRed.withValues(alpha: 0.3),
                             width: 2))),
                 padding: EdgeInsets.symmetric(
                   horizontal: CustomMethods.mediaWidth(context, 20),
                 ),
                 width: double.infinity,
-                child: Stack(
-                  children: [
-                    Transform.translate(
-                      offset: Offset(0, -CustomMethods.mediaWidth(context, 7)),
-                      child: Image(
-                        image: const AssetImage(ImgPath.recipe),
-                        height: CustomMethods.mediaWidth(context, 1),
+                child: ScrollConfiguration(
+                  behavior: NoGlowScrollBehavior(),
+                  child: CustomScrollView(
+                    slivers: [
+                      // Sliver for the top image
+                      SliverToBoxAdapter(
+                        child: Image(
+                          image: const AssetImage(ImgPath.recipe),
+                          height: CustomMethods.mediaWidth(context, 1.5),
+                          fit: BoxFit.contain,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CustomWidgets.height(context, 1.4),
-                          Text(
-                            "Categories",
-                            style: TextStyle(
+                      // Sliver for the "Categories" header and description
+                      SliverToBoxAdapter(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // CustomWidgets.height(context, 1.4),
+                            Text(
+                              "Categories",
+                              style: TextStyle(
                                 color: ColorsClass.black,
                                 fontSize: CustomMethods.mediaWidth(context, 14),
-                                fontFamily: "Fredoka"),
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  "Explore a world of food! Click any type of food to see the options.",
-                                  style: TextStyle(
-                                      color: ColorsClass.black.withOpacity(0.5),
+                                fontFamily: "Fredoka",
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "Explore a world of food! Click any type of food to see the options.",
+                                    style: TextStyle(
+                                      color: ColorsClass.black
+                                          .withValues(alpha: 0.5),
                                       fontSize:
                                           CustomMethods.mediaWidth(context, 20),
-                                      fontFamily: "Fredoka"),
+                                      fontFamily: "Fredoka",
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              CustomWidgets.width(context, 10)
-                            ],
-                          ),
-                          CustomWidgets.height(context, 25),
-                          Expanded(
-                              child: ScrollConfiguration(
-                            behavior: NoGlowScrollBehavior(),
-                            child: GridView.builder(
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 1.1 / 1,
-                                crossAxisSpacing:
-                                    CustomMethods.mediaWidth(context, 30),
-                                mainAxisSpacing:
-                                    CustomMethods.mediaWidth(context, 50),
-                              ),
-                              itemCount: provider.mealCategories.length,
-                              itemBuilder: (context, index) => Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        if (provider.mealCategories[index]
+                                CustomWidgets.width(context, 10),
+                              ],
+                            ),
+                            CustomWidgets.height(context, 25),
+                          ],
+                        ),
+                      ),
+                      // SliverGrid for meal categories
+                      SliverGrid(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 1.1 / 1,
+                          crossAxisSpacing:
+                              CustomMethods.mediaWidth(context, 30),
+                          mainAxisSpacing:
+                              CustomMethods.mediaWidth(context, 50),
+                        ),
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            final category = provider.mealCategories[index];
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      if (provider.mealCategories[index]
                                                 .strCategory ==
                                             "Beef") {
                                           provider
@@ -233,49 +241,53 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                                 .strCategoryThumb);
                                         provider.makeOptionsClickable();
                                         provider.changeCurrentIndex(2, context);
-                                      },
-                                      child: Container(
-                                        width: double.infinity,
-                                        padding: const EdgeInsets.all(9),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: ColorsClass.darkRed
-                                                .withOpacity(0.18)),
-                                        child: FadeInImage(
-                                          placeholderFit: BoxFit.scaleDown,
-                                          placeholder: const AssetImage(
-                                              ImgPath.placeholder2),
-                                          image: NetworkImage(provider
-                                              .mealCategories[index]
-                                              .strCategoryThumb),
-                                          fit: BoxFit.cover,
-                                          fadeInDuration:
-                                              const Duration(milliseconds: 2),
-                                          fadeInCurve: Curves.easeInCirc,
-                                        ),
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.all(9),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: ColorsClass.darkRed
+                                            .withValues(alpha: 0.18),
+                                      ),
+                                      child: FadeInImage(
+                                        placeholderFit: BoxFit.scaleDown,
+                                        placeholder: const AssetImage(
+                                            ImgPath.placeholder2),
+                                        image: NetworkImage(
+                                            category.strCategoryThumb),
+                                        fit: BoxFit.cover,
+                                        fadeInDuration:
+                                            const Duration(milliseconds: 200),
+                                        fadeInCurve: Curves.easeInCirc,
                                       ),
                                     ),
                                   ),
-                                  Text(
-                                    provider.mealCategories[index].strCategory,
-                                    style: TextStyle(
-                                        color: ColorsClass.black,
-                                        fontSize: CustomMethods.mediaWidth(
-                                            context, 20),
-                                        fontFamily: "Fredoka"),
+                                ),
+                                Text(
+                                  category.strCategory,
+                                  style: TextStyle(
+                                    color: ColorsClass.black,
+                                    fontSize:
+                                        CustomMethods.mediaWidth(context, 20),
+                                    fontFamily: "Fredoka",
                                   ),
-                                  CustomWidgets.height(context, 70),
-                                ],
-                              ),
-                            ),
-                          )),
-                        ],
+                                ),
+                                CustomWidgets.height(context, 70),
+                              ],
+                            );
+                          },
+                          childCount: provider.mealCategories.length,
+                        ),
                       ),
-                    )
-                  ],
+                      SliverToBoxAdapter(
+                        child: CustomWidgets.height(context, 27),
+                      ),
+                    ],
+                  ),
                 ),
-              ))),
+              ),
+            ),
     );
   }
 }

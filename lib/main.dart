@@ -10,7 +10,7 @@ import 'package:magic_hands/screens/onboarding.dart';
 import 'package:magic_hands/screens/recipe.dart';
 import 'package:magic_hands/screens/register.dart';
 import 'package:magic_hands/screens/splash.dart';
-import 'package:provider/provider.dart'; 
+import 'package:provider/provider.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -37,6 +37,11 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: _router,
+        theme: ThemeData(
+          splashFactory: NoSplash.splashFactory,
+          splashColor: Colors.white,
+          highlightColor: Colors.white,
+        ),
       ),
     );
   }
