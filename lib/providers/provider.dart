@@ -40,18 +40,45 @@ class ProvidersClass extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeCurrentIndex(int index, BuildContext context) {
-    List<String> routes = ["/home", "/categories", "/meal_options", "/recipe"];
-    if (index == 2 && !_optionsClickable) {
-      _bottomNavigationBarIndex = _bottomNavigationBarIndex;
+  void changeCurrentIndex(int index, BuildContext context) async {
+    List<String> routes = [
+      "/home",
+      "/categories",
+      "/meal_options",
+      "/recipe",
+    ];
+    if (index == 2 && _optionsClickable) {
+      changeCurrentCategory(
+        listOfPopularImgPaths[index]["catName"]!,
+        listOfPopularImgPaths[index]["imgPath"]!,
+      );
     } else if (index == 3 && !_recipeClickable) {
-      _bottomNavigationBarIndex = _bottomNavigationBarIndex;
+      getDataIfItIsNotClickable(context, index, routes);
     } else {
       _bottomNavigationBarIndex = index;
     }
 
     context.go(routes[_bottomNavigationBarIndex]);
     notifyListeners();
+  }
+
+  Future<void> getDataIfItIsNotClickable(
+      BuildContext context, int index, List<String> routes) async {
+    listOfRowMakerIngredients.clear();
+    await getChosenOptionData(
+      int.parse(listOfPopularMeals[index].idMeal),
+      context,
+    );
+    // ignore: use_build_context_synchronously
+    makeListOfIngredients(context);
+    changeCurrentCategory(
+      listOfPopularImgPaths[index]["catName"]!,
+      listOfPopularImgPaths[index]["imgPath"]!,
+    );
+
+    _recipeClickable = true;
+    // ignore: use_build_context_synchronously
+    changeCurrentIndex(3, context);
   }
 
   List<MealCategories> mealCategories = [
@@ -347,7 +374,6 @@ class ProvidersClass extends ChangeNotifier {
     "strYoutube": "https://www.youtube.com/watch?v=mTvlmY4vCug",
   };
 
-
   Future<void> getChosenOptionData(int optionId, BuildContext context) async {
     final response = await get(Uri.parse(
         "https://www.themealdb.com/api/json/v1/1/lookup.php?i=$optionId"));
@@ -422,7 +448,7 @@ class ProvidersClass extends ChangeNotifier {
             _isConnected = false;
             notifyListeners();
             break;
-          }
+        }
       },
     );
   }
