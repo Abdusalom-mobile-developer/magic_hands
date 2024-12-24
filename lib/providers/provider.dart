@@ -47,11 +47,12 @@ class ProvidersClass extends ChangeNotifier {
       "/meal_options",
       "/recipe",
     ];
-    if (index == 2 && _optionsClickable) {
+    if (index == 2 && !_optionsClickable) {
       changeCurrentCategory(
         listOfPopularImgPaths[index]["catName"]!,
         listOfPopularImgPaths[index]["imgPath"]!,
       );
+      _bottomNavigationBarIndex = index;
     } else if (index == 3 && !_recipeClickable) {
       getDataIfItIsNotClickable(context, index, routes);
     } else {
@@ -260,6 +261,49 @@ class ProvidersClass extends ChangeNotifier {
         "Creamy Tomato Soup",
         "https://www.themealdb.com/images/media/meals/stpuws1511191310.jpg",
         "52841"),
+  ];
+
+  List<PopularMeals> listOfFamilyFavoriteMeals = [
+    PopularMeals(
+      "Beef Patties",
+      "https://www.themealdb.com/images/media/meals/wsqqsw1515364068.jpg",
+      "52938",
+    ),
+    PopularMeals(
+      "Bitterballen",
+      "https://www.themealdb.com/images/media/meals/lhqev81565090111.jpg",
+      "52979",
+    ),
+    PopularMeals(
+      "Canadian Butter Tarts",
+      "https://www.themealdb.com/images/media/meals/wpputp1511812960.jpg",
+      "52923",
+    ),
+    PopularMeals(
+      "Spaghetti alla Carbonara",
+      "https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg",
+      "52982",
+    ),
+    PopularMeals(
+      "Thai Green Curry",
+      "https://www.themealdb.com/images/media/meals/sstssx1487349585.jpg",
+      "52814",
+    ),
+    PopularMeals(
+      "Tuna & Egg Briks",
+      "https://www.themealdb.com/images/media/meals/2dsltq1560461468.jpg",
+      "52975",
+    ),
+    PopularMeals(
+      "Pad See Ew",
+      "https://www.themealdb.com/images/media/meals/uuuspp1468263334.jpg",
+      "52774",
+    ),
+    PopularMeals(
+      "Rosół",
+      "https://www.themealdb.com/images/media/meals/lx1kkj1593349302.jpg",
+      "53020",
+    ),
   ];
 
   Future<String> getArea(int optionId) async {
