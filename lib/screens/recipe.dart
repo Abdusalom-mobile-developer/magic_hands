@@ -88,10 +88,12 @@ class _RecipeScreenState extends State<RecipeScreen> {
                 backgroundColor: ColorsClass.bgColor,
                 body: Container(
                   decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                              color: ColorsClass.darkRed.withOpacity(0.3),
-                              width: 2))),
+                    border: Border(
+                      bottom: BorderSide(
+                          color: ColorsClass.darkRed.withValues(alpha: 0.3),
+                          width: 2),
+                    ),
+                  ),
                   child: ScrollConfiguration(
                     behavior: NoGlowScrollBehavior(),
                     child: CustomScrollView(
@@ -115,19 +117,25 @@ class _RecipeScreenState extends State<RecipeScreen> {
                             child: Container(
                               height: CustomMethods.mediaWidth(context, 40),
                               width: double.infinity,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   color: ColorsClass.bgColor,
                                   borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(50),
-                                      topRight: Radius.circular(50))),
+                                      topLeft: Radius.circular(
+                                        CustomMethods.mediaWidth(context, 31),
+                                      ),
+                                      topRight: Radius.circular(
+                                        CustomMethods.mediaWidth(context, 31),
+                                      ))),
                             ),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(vertical: 0),
                             width: double.infinity,
                             child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
+                              padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    CustomMethods.mediaWidth(context, 27),
+                              ),
                               width: double.infinity,
                               decoration: const BoxDecoration(
                                 color: ColorsClass.bgColor,
@@ -136,7 +144,10 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Transform.translate(
-                                    offset: const Offset(0, -5),
+                                    offset: Offset(
+                                      0,
+                                      -CustomMethods.mediaHeight(context, 151),
+                                    ),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -169,7 +180,8 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                                       .trim(),
                                                   style: TextStyle(
                                                       color: ColorsClass.black
-                                                          .withOpacity(0.5),
+                                                          .withValues(
+                                                              alpha: 0.5),
                                                       fontSize: CustomMethods
                                                           .mediaWidth(
                                                               context, 20),
@@ -185,7 +197,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                                   context, 130)),
                                           decoration: BoxDecoration(
                                               color: ColorsClass.darkRed
-                                                  .withOpacity(0.4),
+                                                  .withValues(alpha: 0.4),
                                               borderRadius:
                                                   BorderRadius.circular(12)),
                                           height: CustomMethods.mediaHeight(
@@ -228,8 +240,8 @@ class _RecipeScreenState extends State<RecipeScreen> {
                                         .toString()
                                         .trim(),
                                     style: TextStyle(
-                                        color:
-                                            ColorsClass.black.withOpacity(0.5),
+                                        color: ColorsClass.black
+                                            .withValues(alpha: 0.5),
                                         fontSize: CustomMethods.mediaWidth(
                                             context, 21),
                                         fontFamily: "Fredoka"),

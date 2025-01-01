@@ -57,18 +57,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: CustomMethods.mediaWidth(context, 23))),
           actions: <Widget>[
             TextButton(
-              child: Text('No',
-                  style: TextStyle(
-                    fontFamily: "Fredoka",
-                    fontSize: CustomMethods.mediaWidth(context, 25),
-                  )),
+              child: Text(
+                'No',
+                style: TextStyle(
+                  fontFamily: "Fredoka",
+                  fontSize: CustomMethods.mediaWidth(context, 25),
+                ),
+              ),
               onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(
-              child: Text('Yes',
-                  style: TextStyle(
-                      fontFamily: "Fredoka",
-                      fontSize: CustomMethods.mediaWidth(context, 25))),
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontFamily: "Fredoka",
+                  fontSize: CustomMethods.mediaWidth(context, 25),
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
                 SystemNavigator.pop();
@@ -94,9 +99,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.wifi_off_rounded,
-                          color: ColorsClass.darkRed,
-                          size: CustomMethods.mediaWidth(context, 1.7)),
+                      Icon(
+                        Icons.wifi_off_rounded,
+                        color: ColorsClass.darkRed,
+                        size: CustomMethods.mediaWidth(context, 1.7),
+                      ),
                       Text(
                         "No Connection !",
                         style: TextStyle(
@@ -141,10 +148,12 @@ class _HomeScreenState extends State<HomeScreen> {
               body: SafeArea(
                   child: Container(
                 decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            color: ColorsClass.darkRed.withValues(alpha: 0.3),
-                            width: 2))),
+                  border: Border(
+                    bottom: BorderSide(
+                        color: ColorsClass.darkRed.withValues(alpha: 0.3),
+                        width: 2),
+                  ),
+                ),
                 width: double.infinity,
                 child: ScrollConfiguration(
                   behavior: NoGlowScrollBehavior(),
@@ -202,10 +211,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: CustomMethods.mediaWidth(context, 20),
-                            vertical: CustomMethods.mediaHeight(context, 93),
                           ),
                           child: Container(
-                            height: CustomMethods.mediaWidth(context, 6.8),
+                            height: CustomMethods.mediaHeight(context, 15),
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -518,7 +526,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .withValues(alpha: 0.15),
                                         ],
                                       ),
-                                      borderRadius: BorderRadius.circular(15),
+                                      borderRadius: BorderRadius.circular(
+                                        CustomMethods.mediaWidth(context, 31),
+                                      ),
                                     ),
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.end,
@@ -531,10 +541,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           decoration: BoxDecoration(
                                             color: ColorsClass.darkRed
                                                 .withValues(alpha: 0.67),
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              bottomLeft: Radius.circular(10),
-                                              bottomRight: Radius.circular(10),
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(
+                                                CustomMethods.mediaWidth(
+                                                    context, 31),
+                                              ),
+                                              bottomRight: Radius.circular(
+                                                CustomMethods.mediaWidth(
+                                                    context, 31),
+                                              ),
                                             ),
                                           ),
                                           child: Text(
@@ -564,7 +579,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       SliverToBoxAdapter(
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            vertical: CustomMethods.mediaHeight(context, 157),
                             horizontal: CustomMethods.mediaWidth(context, 20),
                           ),
                           child: Text(
@@ -593,9 +607,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onTap: () async {
                                   provider.listOfRowMakerIngredients.clear();
                                   await provider.getChosenOptionData(
-                                    int.parse(provider
-                                        .listOfFamilyFavoriteMeals[index]
-                                        .idMeal),
+                                    int.parse(
+                                      provider.listOfFamilyFavoriteMeals[index]
+                                          .idMeal,
+                                    ),
                                     context,
                                   );
                                   provider.makeListOfIngredients(context);
@@ -612,11 +627,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   margin: index != 0
                                       ? EdgeInsets.only(
                                           right: CustomMethods.mediaWidth(
-                                              context, 20),
+                                            context,
+                                            20,
+                                          ),
                                         )
                                       : EdgeInsets.symmetric(
                                           horizontal: CustomMethods.mediaWidth(
-                                              context, 20),
+                                            context,
+                                            20,
+                                          ),
                                         ),
                                   height:
                                       CustomMethods.mediaHeight(context, 5.3),
@@ -632,7 +651,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     color: ColorsClass.darkRed
                                         .withValues(alpha: 0.16),
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(
+                                      CustomMethods.mediaWidth(context, 31),
+                                    ),
                                   ),
                                   child: Container(
                                     alignment: Alignment.center,
@@ -655,15 +676,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Container(
                                           alignment: Alignment.center,
                                           height: CustomMethods.mediaHeight(
-                                              context, 20),
+                                            context,
+                                            20,
+                                          ),
                                           width: double.infinity,
                                           decoration: BoxDecoration(
                                             color: ColorsClass.darkRed
                                                 .withValues(alpha: 0.67),
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              bottomLeft: Radius.circular(10),
-                                              bottomRight: Radius.circular(10),
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(
+                                                CustomMethods.mediaWidth(
+                                                    context, 31),
+                                              ),
+                                              bottomRight: Radius.circular(
+                                                CustomMethods.mediaWidth(
+                                                    context, 31),
+                                              ),
                                             ),
                                           ),
                                           child: Text(

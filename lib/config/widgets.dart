@@ -28,7 +28,7 @@ class CustomWidgets {
         decoration: BoxDecoration(
             color: index == i
                 ? ColorsClass.darkRed
-                : ColorsClass.darkRed.withOpacity(0.55),
+                : ColorsClass.darkRed.withValues(alpha: 0.55),
             borderRadius: BorderRadius.circular(10)),
       ));
       if (i != 2) {
@@ -114,7 +114,7 @@ class CustomWidgets {
             Text(
               strIngre,
               style: TextStyle(
-                  color: ColorsClass.black.withOpacity(0.5),
+                  color: ColorsClass.black.withValues(alpha: 0.5),
                   fontSize: CustomMethods.mediaWidth(context, 21),
                   fontFamily: "Fredoka"),
             ),
@@ -129,13 +129,13 @@ class CustomWidgets {
             height: CustomMethods.mediaWidth(context, 250),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: ColorsClass.black.withOpacity(0.5)),
+                color: ColorsClass.black.withValues(alpha: 0.5)),
           ),
         )),
         Text(
           measure,
           style: TextStyle(
-              color: ColorsClass.black.withOpacity(0.5),
+              color: ColorsClass.black.withValues(alpha: 0.5),
               fontSize: CustomMethods.mediaWidth(context, 21),
               fontFamily: "Fredoka"),
         ),
