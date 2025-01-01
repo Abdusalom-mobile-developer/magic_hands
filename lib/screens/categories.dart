@@ -43,9 +43,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.wifi_off_rounded,
-                          color: ColorsClass.darkRed,
-                          size: CustomMethods.mediaWidth(context, 1.7)),
+                      Icon(
+                        Icons.wifi_off_rounded,
+                        color: ColorsClass.darkRed,
+                        size: CustomMethods.mediaWidth(context, 1.7),
+                      ),
                       Text(
                         "No Connection !",
                         style: TextStyle(
@@ -88,10 +90,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   ]),
               body: Container(
                 decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            color: ColorsClass.darkRed.withValues(alpha: 0.3),
-                            width: 2))),
+                  border: Border(
+                    bottom: BorderSide(
+                        color: ColorsClass.darkRed.withValues(alpha: 0.3),
+                        width: 2),
+                  ),
+                ),
                 padding: EdgeInsets.symmetric(
                   horizontal: CustomMethods.mediaWidth(context, 20),
                 ),
@@ -163,90 +167,82 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                   child: GestureDetector(
                                     onTap: () {
                                       if (provider.mealCategories[index]
-                                                .strCategory ==
-                                            "Beef") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(0);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Chicken") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(1);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Dessert") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(2);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Lamb") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(3);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Miscellaneous") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(4);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Pasta") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(5);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Pork") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(6);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Seafood") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(7);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Side") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(8);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Starter") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(9);
-                                        } else if (provider
-                                                .mealCategories[index]
-                                                .strCategory ==
-                                            "Vegan") {
-                                          provider
-                                              .changeCurrentIndexOfCategory(10);
-                                        } else {
-                                          provider
-                                              .changeCurrentIndexOfCategory(11);
-                                        }
-                                        // provider.getAllOptions(provider
-                                        //     .mealCategories[index].strCategory);
+                                              .strCategory ==
+                                          "Beef") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(0);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Chicken") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(1);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Dessert") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(2);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Lamb") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(3);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Miscellaneous") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(4);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Pasta") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(5);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Pork") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(6);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Seafood") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(7);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Side") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(8);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Starter") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(9);
+                                      } else if (provider.mealCategories[index]
+                                              .strCategory ==
+                                          "Vegan") {
+                                        provider
+                                            .changeCurrentIndexOfCategory(10);
+                                      } else {
+                                        provider
+                                            .changeCurrentIndexOfCategory(11);
+                                      }
 
-                                        provider.changeCurrentCategory(
-                                            provider.mealCategories[index]
-                                                .strCategory,
-                                            provider.mealCategories[index]
-                                                .strCategoryThumb);
-                                        provider.makeOptionsClickable();
-                                        provider.changeCurrentIndex(2, context);
+                                      provider.changeCurrentCategory(
+                                          provider.mealCategories[index]
+                                              .strCategory,
+                                          provider.mealCategories[index]
+                                              .strCategoryThumb);
+                                      provider.makeOptionsClickable();
+                                      provider.changeCurrentIndex(2, context);
                                     },
                                     child: Container(
                                       width: double.infinity,
-                                      padding: const EdgeInsets.all(9),
+                                      padding: EdgeInsets.all(
+                                        CustomMethods.mediaWidth(context, 35),
+                                      ),
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(
+                                          CustomMethods.mediaWidth(context, 31),
+                                        ),
                                         color: ColorsClass.darkRed
                                             .withValues(alpha: 0.18),
                                       ),

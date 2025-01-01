@@ -40,15 +40,8 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-    
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // Provider.of<ProvidersClass>(context).getAllOptions();
     return Scaffold(
         backgroundColor: ColorsClass.bgColor,
         body: Stack(
@@ -63,30 +56,36 @@ class _SplashScreenState extends State<SplashScreen> {
                     image: const AssetImage(ImgPath.logo),
                     height: CustomMethods.mediaWidth(context, 1.4),
                   ),
-                  Text("Magic Hands",
-                      style: TextStyle(
-                          color: ColorsClass.black,
-                          fontSize: CustomMethods.mediaWidth(context, 9),
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Fredoka")),
+                  Text(
+                    "Magic Hands",
+                    style: TextStyle(
+                      color: ColorsClass.black,
+                      fontSize: CustomMethods.mediaWidth(context, 9),
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Fredoka",
+                    ),
+                  ),
                   CustomWidgets.height(context, 5),
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                  bottom: CustomMethods.mediaWidth(context, 24)),
+                bottom: CustomMethods.mediaWidth(context, 24),
+              ),
               child: SizedBox(
                 width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text("Create your own magic.",
-                        style: TextStyle(
-                            color: ColorsClass.black,
-                            fontSize: CustomMethods.mediaWidth(context, 18),
-                            fontFamily: "Fredoka"))
+                    Text(
+                      "Create your own magic.",
+                      style: TextStyle(
+                          color: ColorsClass.black,
+                          fontSize: CustomMethods.mediaWidth(context, 18),
+                          fontFamily: "Fredoka"),
+                    ),
                   ],
                 ),
               ),

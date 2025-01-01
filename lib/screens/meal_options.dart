@@ -24,12 +24,6 @@ class _MealOptionsState extends State<MealOptions> {
         myInterceptor(stopDefaultButtonEvent, info, context));
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   BackButtonInterceptor.remove(myInterceptor);
-  // }
-
   bool myInterceptor(
       bool stopDefaultButtonEvent, RouteInfo info, BuildContext context) {
     Provider.of<ProvidersClass>(context, listen: false)
@@ -121,7 +115,8 @@ class _MealOptionsState extends State<MealOptions> {
                         decoration: BoxDecoration(
                             border: Border(
                                 bottom: BorderSide(
-                                    color: ColorsClass.darkRed.withOpacity(0.3),
+                                    color: ColorsClass.darkRed
+                                        .withValues(alpha: 0.3),
                                     width: 2))),
                         width: double.infinity,
                         child: ScrollConfiguration(
@@ -132,8 +127,9 @@ class _MealOptionsState extends State<MealOptions> {
                                   delegate: SliverChildListDelegate([
                                 Container(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: CustomMethods.mediaWidth(
-                                          context, 28)),
+                                    horizontal:
+                                        CustomMethods.mediaWidth(context, 28),
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -144,7 +140,9 @@ class _MealOptionsState extends State<MealOptions> {
                                         style: TextStyle(
                                             color: ColorsClass.black,
                                             fontSize: CustomMethods.mediaWidth(
-                                                context, 14),
+                                              context,
+                                              14,
+                                            ),
                                             fontFamily: "Fredoka"),
                                       ),
                                       Padding(
@@ -155,7 +153,7 @@ class _MealOptionsState extends State<MealOptions> {
                                           "Select a meal to see the ingredients and cooking instructions.",
                                           style: TextStyle(
                                               color: ColorsClass.black
-                                                  .withOpacity(0.5),
+                                                  .withValues(alpha: 0.5),
                                               fontSize:
                                                   CustomMethods.mediaWidth(
                                                       context, 20),
@@ -193,18 +191,22 @@ class _MealOptionsState extends State<MealOptions> {
                                       height: CustomMethods.mediaHeight(
                                           context, 5.8),
                                       width: double.infinity,
-                                      padding: const EdgeInsets.all(6),
+                                      padding: EdgeInsets.all(
+                                        CustomMethods.mediaWidth(context, 49),
+                                      ),
                                       decoration: BoxDecoration(
-                                          color: ColorsClass.bgColor,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: ColorsClass.black
-                                                    .withOpacity(0.1),
-                                                offset: const Offset(0, 5),
-                                                blurRadius: 5)
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
+                                        color: ColorsClass.bgColor,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: ColorsClass.black
+                                                  .withValues(alpha: 0.1),
+                                              offset: const Offset(0, 5),
+                                              blurRadius: 5)
+                                        ],
+                                        borderRadius: BorderRadius.circular(
+                                          CustomMethods.mediaWidth(context, 31),
+                                        ),
+                                      ),
                                       child: Row(
                                         children: [
                                           Expanded(
@@ -212,7 +214,10 @@ class _MealOptionsState extends State<MealOptions> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(15),
+                                                      BorderRadius.circular(
+                                                    CustomMethods.mediaWidth(
+                                                        context, 31),
+                                                  ),
                                                   image: DecorationImage(
                                                       image: NetworkImage(provider
                                                           .list[provider
@@ -266,33 +271,6 @@ class _MealOptionsState extends State<MealOptions> {
                                                               fontFamily:
                                                                   "Fredoka"),
                                                         ),
-                                                        // Transform.translate(
-                                                        //   offset: Offset(
-                                                        //       0,
-                                                        //       -CustomMethods
-                                                        //           .mediaWidth(
-                                                        //               context,
-                                                        //               78)),
-                                                        //   child: Text(
-                                                        //     provider
-                                                        //         .list[provider
-                                                        //                 .currentIndex]
-                                                        //             [index]
-                                                        //         .strArea,
-                                                        //     style: TextStyle(
-                                                        //         color: ColorsClass
-                                                        //             .black
-                                                        //             .withOpacity(
-                                                        //                 0.5),
-                                                        //         fontSize:
-                                                        //             CustomMethods
-                                                        //                 .mediaWidth(
-                                                        //                     context,
-                                                        //                     20),
-                                                        //         fontFamily:
-                                                        //             "Fredoka"),
-                                                        //   ),
-                                                        // ),
                                                       ],
                                                     ),
                                                     Row(
@@ -300,30 +278,37 @@ class _MealOptionsState extends State<MealOptions> {
                                                           MainAxisAlignment.end,
                                                       children: [
                                                         Container(
-                                                            height: CustomMethods
-                                                                .mediaWidth(
-                                                                    context, 10),
+                                                            height:
+                                                                CustomMethods
+                                                                    .mediaWidth(
+                                                                        context,
+                                                                        10),
                                                             width: CustomMethods
                                                                 .mediaWidth(
-                                                                    context, 4),
+                                                                    context,
+                                                                    4),
                                                             alignment: Alignment
                                                                 .center,
-                                                            decoration: BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius.circular(
-                                                                        CustomMethods.mediaWidth(
-                                                                            context,
-                                                                            30)),
-                                                                color: ColorsClass
-                                                                    .darkRed),
-                                                            child:
-                                                                Transform.translate(
-                                                              offset: Offset(
-                                                                  0,
-                                                                  -CustomMethods
-                                                                      .mediaWidth(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                      CustomMethods.mediaWidth(
                                                                           context,
-                                                                          180)),
+                                                                          30),
+                                                                    ),
+                                                                    color: ColorsClass
+                                                                        .darkRed),
+                                                            child: Transform
+                                                                .translate(
+                                                              offset: Offset(
+                                                                0,
+                                                                -CustomMethods
+                                                                    .mediaWidth(
+                                                                        context,
+                                                                        180),
+                                                              ),
                                                               child: Text(
                                                                 "More",
                                                                 style: TextStyle(
